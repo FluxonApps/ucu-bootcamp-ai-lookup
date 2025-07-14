@@ -10,9 +10,9 @@ type ScraperProps = {
 export default function Scraper({ api_key, url, country, product }: ScraperProps) {
   const baseUrl = 'https://api.scrapingdog.com/google_lens';
   const params: any = {
-    api_key: api_key,
-    url: url,
-    country: country,
+    api_key,
+    url,
+    country,
     product_results: product ? 'true' : 'false',
   };
   axios
