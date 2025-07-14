@@ -4,7 +4,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import {
   useAuthState,
   useCreateUserWithEmailAndPassword,
-  useSignInWithEmailAndPassword,
+  useSignInWithEmailAndPassword
 } from 'react-firebase-hooks/auth';
 import { Navigate } from 'react-router';
 
@@ -16,8 +16,8 @@ const auth = getAuth();
 
 const AuthPage = () => {
   const [user] = useAuthState(auth);
-  const [signInWithEmailAndPassword, , signInLoading] = useSignInWithEmailAndPassword(auth);
-  const [createUserWithEmailAndPassword, , signUpLoading] = useCreateUserWithEmailAndPassword(auth);
+  const [signInWithEmailAndPassword, signInLoading] = useSignInWithEmailAndPassword(auth);
+  const [createUserWithEmailAndPassword, signUpLoading] = useCreateUserWithEmailAndPassword(auth);
   const loading = signInLoading || signUpLoading;
 
   const [showSignIn, setShowSignIn] = useState(false);
@@ -78,7 +78,7 @@ const AuthPage = () => {
 
   // Check if user is already signed in. If yes, redirect to main app.
   if (user) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to="/search" replace />;
   }
 
   return (
