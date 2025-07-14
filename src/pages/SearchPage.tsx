@@ -1,12 +1,13 @@
+import { Link } from 'react-router';
 import { getAuth } from 'firebase/auth';
-import { useAuthState, useSignOut } from 'react-firebase-hooks/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Navigate } from 'react-router';
+import ImageUpload from '../components/ImageUpload.tsx'
 
 const auth = getAuth();
 
-const DashboardPage = () => {
+const SearchPage = () => {
   const [user, userLoading] = useAuthState(auth);
-  const [signOut, isSigningOut] = useSignOut(auth);
 
   // Do not show page content until auth state is fetched.
   if (userLoading) {
@@ -19,11 +20,11 @@ const DashboardPage = () => {
   }
 
   return (
-    <div className="p-6">
-      <p>Welcome to your app!</p>
-      <button className="bg-green-500" onClick={signOut} disabled={isSigningOut}>Sign out</button>
+    <div className="flex justify-center">
+      <ImageUpload></ImageUpload>
+      <Link to="/profile">Profile</Link>
     </div>
   );
 };
 
-export default DashboardPage;
+export default SearchPage;

@@ -4,16 +4,16 @@ import { BrowserRouter, Route, Routes } from 'react-router';
 
 import './index.css';
 import AuthPage from './pages/AuthPage.tsx';
-import DashboardPage from './pages/DashboardPage.tsx';
-import FirebaseDemo from './pages/FirebaseDemo.tsx';
 import HomePage from './pages/HomePage.tsx';
+import SearchPage from './pages/SearchPage.tsx';
+import ProfilePage from './pages/ProfilePage.tsx';
 
 const AppRoutes = () => (
   <Routes>
     <Route path="/" element={<HomePage />} />
-    <Route path="/firebase-demo" element={<FirebaseDemo />} />
     <Route path="/auth" element={<AuthPage />} />
-    <Route path="/dashboard" element={<DashboardPage />} />
+    <Route path="/search" element={<SearchPage />} />
+    <Route path="/profile" element={<ProfilePage />} />
   </Routes>
 );
 
