@@ -28,7 +28,7 @@ const ProfilePage = () => {
         </div>
         <div className="flex justify-around">
           <button onClick={signOut} disabled={isSigningOut} className="hover:scale-110 duration-300 ease-in-out">Sign out</button>
-          <Link to="/search" className="hover:scale-110 duration-300 ease-in-out">Back to lookup</Link>
+          <Link to="/search" className="hover:scale-110 duration-300 ease-in-out">Back to main page</Link>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { getAuth } from 'firebase/auth';
+import { getAuth, updateProfile } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import {
@@ -21,6 +21,7 @@ const AuthPage = () => {
   const loading = signInLoading || signUpLoading;
 
   const [showSignIn, setShowSignIn] = useState(false);
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -28,6 +29,10 @@ const AuthPage = () => {
     setShowSignIn((prevState) => !prevState);
     setEmail('');
     setPassword('');
+  };
+
+  const handleUsernameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setUsername(e.target.value);
   };
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -56,6 +61,9 @@ const AuthPage = () => {
       if (!res) throw new Error();
 
       // Save user to database.
+      updateProfile(res.user, {
+        displayName: username
+      });
       const userDocRef = doc(db, 'users', res.user.uid);
       await setDoc(userDocRef, { email });
 
@@ -87,6 +95,16 @@ const AuthPage = () => {
         <form className="mx-auto" onSubmit={handleAuth}>
           <div className="flex flex-col gap-4 w-[500px] bg-white rounded-md p-8">
             <h2 className="text-2xl! text-black">{showSignIn ? 'Sign in' : 'Sign up'}</h2>
+            {!showSignIn && <input
+              className="border border-solid border-slate-200 rounded-lg py-2 px-4 text-black"
+              placeholder="Username"
+              type="text"
+              name="username"
+              onChange={handleUsernameChange}
+              value={username}
+              minLength={6}
+              required
+            />}
             <input
               className="border border-solid border-slate-200 rounded-lg py-2 px-4 text-black"
               placeholder="Email"
