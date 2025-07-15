@@ -1,52 +1,127 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Scraper = Scraper;
-exports.PriceGetter = PriceGetter;
+exports.aiLookup = aiLookup;
+exports.default = ScraperMain;
+/* eslint-disable prettier/prettier */
 const axios_1 = __importDefault(require("axios"));
 const openai_1 = __importDefault(require("openai"));
+require("dotenv/config");
+const priceCourse = {
+    uah: 1,
+    usd: 42,
+    eur: 45,
+    pln: 11,
+    gbp: 56,
+    cny: 6,
+    jpy: 0.3,
+};
 const client = new openai_1.default({
-    apiKey: "your API"
+    apiKey: process.env.OPEN_AI_API_KEY,
 });
-function Scraper({ api_key, url, country, product }) {
+async function Scraper({ api_key, url, country, product }) {
     const baseUrl = 'https://api.scrapingdog.com/google_lens';
     const params = {
-        api_key: api_key,
-        url: url,
-        country: country,
+        api_key,
+        url,
+        country,
         product_results: product ? 'true' : 'false',
     };
-    axios_1.default
-        .get(baseUrl, { params })
-        .then((response) => {
+    try {
+        const response = await axios_1.default.get(baseUrl, { params });
         if (response.status === 200) {
             return response.data;
         }
         else {
             console.log('Request failed with status code: ' + response.status);
+            return null;
         }
-    })
-        .catch((error) => {
+    }
+    catch (error) {
         console.error('Error making the request: ' + error.message);
-    });
+        return null;
+    }
 }
-function PriceGetter(link) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const response = yield client.responses.create({
-            model: "gpt-4.1",
-            input: `Find and print as single number price of the product from this page ${link}`
+function splitIntoBatches({ array, batchSize = 3 }) {
+    const batches = [];
+    for (let i = 0; i < array.length; i += batchSize) {
+        const batch = array.slice(i, i + batchSize);
+        batches.push(batch);
+    }
+    return batches;
+}
+async function aiLookup({ urlBatches, }) {
+    const results = [];
+    for (const urlBatch of urlBatches) {
+        const response = await client.responses.create({
+            model: 'gpt-4.1',
+            input: 'For each of the following links, return the price as a plain integer with no text or formatting. Output in this format: [{amount: 19900, currency: eur}, {amount: 29900, currency: usd}, {amount: 39900, currency: uah}].Use double quotes for all keys and string values. Do not include any explanation or extra text. Links: ' +
+                urlBatch.join(', '),
         });
-        //   console.log(response["lens_result"])
-    });
+        const text = response.output_text;
+        console.log('Raw response:', text);
+        try {
+            const jsonMatch = text.match(/\[.*\]/s);
+            const parsed = JSON.parse((jsonMatch === null || jsonMatch === void 0 ? void 0 : jsonMatch[0]) || '[]');
+            parsed.forEach((priceObj, index) => {
+                const url = urlBatch[index];
+                if (!url) {
+                    return;
+                }
+                results.push({
+                    url,
+                    price: priceObj.amount,
+                    currency: priceObj.currency,
+                    name_of_website: new URL(url).hostname,
+                });
+                return undefined;
+            });
+        }
+        catch (err) {
+            console.error('Failed to parse prices:', err);
+            urlBatch.forEach((url) => {
+                results.push({
+                    url,
+                    price: null,
+                    currency: null,
+                    name_of_website: new URL(url).hostname,
+                });
+            });
+        }
+    }
+    return results;
 }
+async function ScraperMain(imageUrl) {
+    var _a;
+    const parserApiKey = process.env.SCRAPINGDOG_API_KEY;
+    const scraperResponse = await Scraper({ api_key: parserApiKey, url: imageUrl, country: 'ua', product: true });
+    const lensResults = (_a = scraperResponse === null || scraperResponse === void 0 ? void 0 : scraperResponse.lens_results) === null || _a === void 0 ? void 0 : _a.slice(0, 8);
+    const pureLinks = lensResults === null || lensResults === void 0 ? void 0 : lensResults.map((item) => item.link);
+    const batches = splitIntoBatches({ array: pureLinks !== null && pureLinks !== void 0 ? pureLinks : [], batchSize: 3 });
+    const aiResults = await aiLookup({ urlBatches: batches, sortParameter: 'price' });
+    aiResults.forEach((item, index) => {
+        var _a;
+        item['title'] = ((_a = lensResults === null || lensResults === void 0 ? void 0 : lensResults[index]) === null || _a === void 0 ? void 0 : _a.title) || '';
+    });
+    aiResults.sort((a, b) => {
+        if (a.price === null || b.price === null || a.currency === null || b.currency === null) {
+            return 0;
+        }
+        const aRate = priceCourse[a.currency];
+        const aPriceInUah = a.price * aRate;
+        const bRate = priceCourse[b.currency];
+        const bPriceInUah = b.price * bRate;
+        return aPriceInUah - bPriceInUah;
+    });
+    return { similarListings: aiResults };
+}
+// test call
+// (async () => {
+//   const imageUrl =
+//     'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRkrbe3LSy-EAQYMa_BR1x0SU4FOKskVEk-epTJTUve6XU5s3d0VGWNtkHboVYk9kszrM4SAxegOmbjKmXuOn-GGlqaB4U1KbB22mhsOMwK8G5JIbC3chBWP10';
+//   const result = await ScraperMain(imageUrl);
+//   //   console.log('Final Result:', result);
+// })();
