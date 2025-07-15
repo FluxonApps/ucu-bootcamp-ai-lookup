@@ -7,6 +7,7 @@ import AuthPage from './pages/AuthPage.tsx';
 import HomePage from './pages/HomePage.tsx';
 import SearchPage from './pages/SearchPage.tsx';
 import ProfilePage from './pages/ProfilePage.tsx';
+import FirebaseDemo from './pages/FirebaseDemo.tsx';
 
 const AppRoutes = () => (
   <Routes>
@@ -14,6 +15,7 @@ const AppRoutes = () => (
     <Route path="/auth" element={<AuthPage />} />
     <Route path="/search" element={<SearchPage />} />
     <Route path="/profile" element={<ProfilePage />} />
+    <Route path="/firebase-demo" element={<FirebaseDemo />} />
   </Routes>
 );
 

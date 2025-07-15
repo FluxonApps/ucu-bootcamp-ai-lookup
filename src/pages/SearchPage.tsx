@@ -1,8 +1,8 @@
-import { Link } from 'react-router';
 import { getAuth } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Navigate } from 'react-router';
 import ImageUpload from '../components/ImageUpload.tsx'
+import { ProfileButton } from '../components/ProfileButton.tsx';
 
 const auth = getAuth();
 
@@ -20,9 +20,129 @@ const SearchPage = () => {
   }
 
   return (
-    <div className="flex justify-center">
+    <div className="justify-center">
+      <ProfileButton></ProfileButton>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
+      <p className='flex w-screen'>1</p>
       <ImageUpload></ImageUpload>
-      <Link to="/profile">Profile</Link>
     </div>
   );
 };

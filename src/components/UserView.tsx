@@ -1,8 +1,8 @@
-import { getAuth, updateProfile, updateEmail } from 'firebase/auth';
+import { getAuth, updateProfile, updateEmail, updatePassword } from 'firebase/auth';
 import { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-import defaultUserPicture from '../assets/default-logo.jpg';
+import defaultUserPicture from '../assets/default-user.jpg';
 
 const auth = getAuth();
 
@@ -11,14 +11,28 @@ export function UserView() {
 
   const [newName, setNewName] = useState(user?.displayName);
   const [newEmail, setNewEmail] = useState(user?.email);
+  const [newPassword, setNewPassword] = useState("");
 
   const updateUser = () => {
-    const name_promise = updateProfile(user, {
+    updateProfile(user, {
       displayName: newName
-    });
-    const email_promise = updateEmail(user, newEmail);
-    Promise.all([name_promise, email_promise]).then(() => {
-      alert("Profile data changed successfully")
+    }).then(() => {
+      updateEmail(user, newEmail).then(() => {
+        if (!newPassword)
+        {
+          alert("Changed data successfully")
+          return;
+        }
+        updatePassword(user, newPassword).then(() => {
+          alert("Changed data successfully")
+        }).catch(() => {
+          alert("Error during changing a password")
+        });
+      }).catch(() => {
+        alert("Error during changing an email")
+      });
+    }).catch(() => {
+      alert("Error during changing a username")
     });
   }
 
@@ -45,8 +59,16 @@ export function UserView() {
             setNewEmail(event.target.value);
           }}
         />
+        <input
+          className="border"
+          placeholder="New password..."
+          value={newPassword}
+          onChange={(event) => {
+            setNewPassword(event.target.value);
+          }}
+        />
       </div>
-      <button className="w-[75%] bg-green-500 px-2 py-1 hover:scale-110 duration-300 ease-in-out" onClick={updateUser}>
+      <button className="hover:scale-110 duration-300 ease-in-out bg-gradient-to-r from-cyan-500 to-blue-500 py-2 px-3" onClick={updateUser}>
         Update info
       </button>
     </div>
