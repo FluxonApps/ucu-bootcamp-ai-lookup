@@ -1,24 +1,10 @@
-import Scraper from '../scripts/Scraper.ts';
-import { PriceGetter } from '../scripts/Scraper.ts';
 import { Link } from 'react-router';
 
 import fluxonLogo from '../assets/fluxon-logo.svg';
 import ucuLogo from '../assets/ucu-logo.svg';
 import MainLayout from '../components/layout/MainLayout.tsx';
 
-const url =
-  'https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/3138c8f0-5929-48d7-8c58-9126f53d8463/NIKE+INTERACT+RUN+EASYON.png';
-const api_key = '6874bcdab51509dfab934624';
-
-const result = Scraper({
-  api_key: api_key,
-  url: url,
-  country: 'us',
-  product: true,
-});
-
 const HomePage = () => {
-  console.log('Scraper result:', result);
   return (
     <MainLayout>
       <div className="flex flex-col gap-4 items-center justify-center h-full">
