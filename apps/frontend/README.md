@@ -111,3 +111,18 @@ TailwindCSS: official documentation https://tailwindcss.com/docs/styling-with-ut
 The above list is incomplete, so if you need anything - you know [whom](https://github.com/FluxonApps/ucu-summer-school-project-template/assets/86969397/f93ff07b-f70e-476d-9ed5-14f25d474a53) to ask 😊
 
 **Good luck!**
+
+## /backend_server usage tutorial:
+
+Go inside apps/backend_server \
+run `npm install` -> `npm run build` -> `npm start` \
+Go to `http://localhost:3131/scrape` \
+Manually provide a url for testing in the following way:
+`http://localhost:3131/scrape/?url=` \
+Wait a few seconds for a response.
+
+## /frontend usage tutorial
+
+go inside apps/frontend \
+run `npm run dev`.
+Boom
