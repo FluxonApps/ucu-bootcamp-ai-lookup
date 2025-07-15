@@ -10,7 +10,7 @@ const app = express();
 const PORT = Number(process.env.PORT);
 
 // Handling GET / Request
-app.get('/', async (req, res) => {
+app.get('scrape/', async (req, res) => {
     const url = req.query.url as string;
 
     const result = await ScraperMain(url);
