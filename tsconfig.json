@@ -21,6 +21,6 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true
   },
-  "include": ["src", "firebase.config.ts"],
+  "include": ["src", "src/firebase.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

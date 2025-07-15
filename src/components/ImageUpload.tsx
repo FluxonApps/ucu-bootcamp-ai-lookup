@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
+import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
 
-const ImageUpload = () => {
+function ImageUpload() {
     const [selectedFile, setSelectedFile] = useState()
-    const [preview, setPreview] = useState()
+    const [preview, setPreview] = useState("")
+    const storage = getStorage()
 
     useEffect(() => {
         if (!selectedFile) {
-            setPreview(undefined)
+            setPreview("")
             return
         }
 
@@ -25,10 +27,22 @@ const ImageUpload = () => {
         setSelectedFile(e.target.files[0])
     }
 
+    const handleUpload = async () => {
+        if (!selectedFile) return;
+
+        const storageRef = ref(storage, preview);
+        await uploadBytes(storageRef, selectedFile);
+        const downloadURL = await getDownloadURL(storageRef);
+        setPreview(downloadURL);
+        console.log("Uploaded and available at:", downloadURL);
+
+    }
+
     return (
         <div>
-            <input type='image/*' onChange={onSelectFile}/>
+            <input type='file' accept='image/*' onChange={onSelectFile}/>
             {selectedFile && <img src={preview}/>}
+            <button onClick={handleUpload} className='bg-green-100 p-8'>Upload</button>
         </div>
     )
 }

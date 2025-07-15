@@ -21,7 +21,7 @@ const SearchPage = () => {
 
   return (
     <div className="flex justify-center">
-      <ImageUpload></ImageUpload>
+      <ImageUpload />
       <Link to="/profile">Profile</Link>
     </div>
   );
