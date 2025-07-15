@@ -93,6 +93,8 @@ You could do this manually, or via an automated GitHub Actions workflow. Just as
 ### LINKS:
 
 Figma design file: https://www.figma.com/design/jTdkZgNfiAMwGCxpHY9lRp/Untitled?node-id=0-1&p=f&t=LGhCqmQKcdqnSgVw-0
+PRD document: https://docs.google.com/document/d/1tOFVZL6-Wku7vtw4rzxisLIYC9OdnxfbCN3cENcjDuA/edit?tab=t.0#heading=h.djd578ti9xl
+
 
 
 
