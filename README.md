@@ -90,6 +90,12 @@ You could do this manually, or via an automated GitHub Actions workflow. Just as
 
 ## Useful Materials
 
+### LINKS:
+
+Figma design file: https://www.figma.com/design/jTdkZgNfiAMwGCxpHY9lRp/Untitled?node-id=0-1&p=f&t=LGhCqmQKcdqnSgVw-0
+
+
+
 > Before you proceed with this section, **REMEMBER THERE ARE NO STUPID OR LAME QUESTIONS**. If you're feeling like you don't know something, this means there's room for improvement – so just say it out loud and your mentor or peers will help you! We're all here to learn something new ([even mentors!](https://github.com/user-attachments/assets/c0c34e3a-8c5b-4bd8-9a8e-41c66bacece5)), so let's actually have a great time together!!!
 
 > No, seriously, if there's anything, no matter however "obvious" this thing feels to you, don't be shy asking about it. Otherwise we'll be sad a question died never seeing the world 🥀🥀🥀
