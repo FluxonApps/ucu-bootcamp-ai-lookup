@@ -30,14 +30,13 @@ function ImageUpload() {
     const handleUpload = async () => {
         if (!selectedFile) return;
 
-        const storageRef = ref(storage, preview);
+        const fileName = `${Date.now()}_${selectedFile.name}`;
+        const storageRef = ref(storage, `uploads/${fileName}`);
         await uploadBytes(storageRef, selectedFile);
         const downloadURL = await getDownloadURL(storageRef);
         setPreview(downloadURL);
         console.log("Uploaded and available at:", downloadURL);
-
     }
-
     return (
         <div>
             <input type='file' accept='image/*' onChange={onSelectFile}/>
