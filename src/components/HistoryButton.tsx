@@ -1,15 +1,16 @@
-import { Link } from 'react-router';
+import historyButtonOpen from '../assets/history-button-open.png';
+import historyButtonClose from '../assets/history-button-close.png';
+import { useState } from 'react';
 
-import gradientBackground from '../assets/gradient-background.png';
-import transparentDefaultUserPicture from '../assets/transparent-default-user.png';
+export function HistoryButton({ callback }) {
+    const [isOpened, setOpened] = useState(false)
 
-export function HistoryButton() {
     return (
-        <Link to="/profile">
-            <div className="w-16 h-16 cursor-pointer hover:scale-110 duration-300 fixed top-5 right-5">
-                <img className="w-16 h-16 rounded-2xl" src={gradientBackground}/>
-                <img className="w-10 h-10 rounded-2xl z-10 top-3 right-3 absolute" src={transparentDefaultUserPicture}/>
-            </div>
-        </Link>
+        <div onClick={() => {
+            callback(!isOpened)
+            setOpened(!isOpened)
+        }} className="w-10 h-10 cursor-pointer hover:scale-110 duration-300 fixed top-7 left-7 z-10">
+            <img className="w-10 h-10 hover:scale-110 ease-in-out duration-300" src={isOpened ? historyButtonClose : historyButtonOpen}/>
+        </div>
     );
 }
