@@ -7,7 +7,9 @@ import { HistoryButton } from '../components/HistoryButton.tsx';
 import { Sidebar } from '../components/Sidebar.tsx';
 import { ActiveQuery } from '../components/ActiveQuery.tsx';
 import { HistoryQuery } from '../components/HistoryQuery.tsx';
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { db } from '../../firebase.config.ts';
 import testPicture from '../assets/default-user.jpg';
 
 const auth = getAuth();
@@ -16,26 +18,6 @@ const SearchPage = () => {
   const [user, userLoading] = useAuthState(auth);
   const [isSidebarOpened, setSidebarOpened] = useState(false);
   const [activePage, setActivePage] = useState(-1);
-  const [history, setHistory] = useState([]);
-  const firstUpdate = useRef(true);
-
-  useEffect(() => {
-    if (firstUpdate.current)
-    {
-      firstUpdate.current = false;
-      return;
-    }
-
-    // load history from db here
-    const historyPreview = [];
-    for (let i = 1; i <= 100; ++i) {
-      historyPreview.push({
-          date: "Query " + i,
-          image: testPicture
-      });
-    }
-    setHistory(historyPreview);
-  }, [userLoading])
 
   // Do not show page content until auth state is fetched.
   if (userLoading) {
@@ -47,13 +29,17 @@ const SearchPage = () => {
     return <Navigate to="/auth" replace />;
   }
 
-  const processQuery = queryData => {
-    // main logic to process the query
-    setActivePage(history.length)
-    setHistory(history.concat([{
-      date: "Query " + (history.length + 1),
+  const processQuery = async queryData => {
+    const dbUser = doc(db, 'users', user?.uid);
+    const dbUserData = await getDoc(dbUser);
+    const newId = new Date().getTime();
+    let historyObj = dbUserData.data()?.history;
+    historyObj[newId] = {
+      date: "Query " + (Object.entries(historyObj).length + 1),
       image: testPicture
-    }]));
+    }
+    await updateDoc(dbUser, { history: historyObj });
+    setActivePage(newId);
   }
 
   return (
@@ -63,7 +49,7 @@ const SearchPage = () => {
       <Sidebar isOpened={isSidebarOpened} history={history} activePage={activePage} setActivePage={setActivePage}></Sidebar>
       {activePage == -1
       ? <ActiveQuery processQuery={processQuery}></ActiveQuery>
-      : <HistoryQuery queryData={history[activePage]} newQueryCallback={() => setActivePage(-1)}></HistoryQuery>}
+      : <HistoryQuery historyPage={activePage} newQueryCallback={() => setActivePage(-1)}></HistoryQuery>}
       <ImageUpload></ImageUpload>
     </div>
   );

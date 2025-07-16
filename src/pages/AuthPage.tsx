@@ -1,5 +1,5 @@
 import { getAuth, updateProfile } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc, updateDoc } from 'firebase/firestore';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import {
   useAuthState,
@@ -65,7 +65,7 @@ const AuthPage = () => {
         displayName: username
       });
       const userDocRef = doc(db, 'users', res.user.uid);
-      await setDoc(userDocRef, { email });
+      await setDoc(userDocRef, { email, history: {} });
 
       alert('Successfully signed up!');
     } catch (e) {
