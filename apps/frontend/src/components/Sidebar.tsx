@@ -1,7 +1,7 @@
 import { getAuth } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Navigate } from 'react-router';
-import { doc, getDoc } from 'firebase/firestore';
+import { query, collection, where, getDocs } from 'firebase/firestore';
 import { useState, useEffect } from 'react'
 import { db } from '../../firebase.config.ts';
 import { HistoryButton } from './HistoryButton.tsx';
@@ -11,22 +11,14 @@ import addQuerySign from "../assets/plus.png"
 const auth = getAuth();
 
 export function Sidebar({ isOpened, activePageId, setActivePageId, closeBtnCallback }) {
-    const getHistoryData = async () => {
-        const dbUser = doc(db, 'users', user?.uid);
-        const dbUserData = await getDoc(dbUser);
-        return dbUserData.data()?.history;
-    }
-
     const [user, userLoading] = useAuthState(auth);
-    const [historyData, setHistoryData] = useState({});
+    const [historyData, setHistoryData] = useState([]);
 
     useEffect(() => {
-        getHistoryData().then(data => {
-            setHistoryData(data ? data : {});
-        });
+        getHistoryData().then(setHistoryData);
     }, [activePageId]);
 
-    // Do not show page content until auth state is fetched.
+     // Do not show page content until auth state is fetched.
     if (userLoading) {
         return null;
     }
@@ -36,16 +28,22 @@ export function Sidebar({ isOpened, activePageId, setActivePageId, closeBtnCallb
         return <Navigate to="/auth" replace />;
     }
 
+    const getHistoryData = async () => {
+        const dbQueries = collection(db, "queries");
+        const userHistorySnapshot = await getDocs(query(dbQueries, where("userId", "==", user.uid)));
+        return userHistorySnapshot.docs.sort((a, b) => a.data().timestamp < b.data().timestamp ? -1 : 1);
+    }
+
     return (
         <div className={"h-screen bg-white duration-300 origin-left fixed left-0 top-0 overflow-x-hidden w-0 overflow-y-hidden z-10 " + (isOpened && "w-100 overflow-y-scroll")}>
             <div className="min-w-50 flex flex-col-reverse">
-                {Object.entries(historyData).sort().map((query, i) => {
+                {historyData.map(query => {
                     return (
-                        <div key={i} onClick={() => {
-                            setActivePageId(query[0]);
-                        }} className={"flex justify-between items-center min-w-10 border-2 border-(--color-gray) rounded-lg p-2 hover:scale-102 duration-300 cursor-pointer m-2 " + (query[0] == activePageId && "scale-102 bg-[#D9D9D9]")}>
-                            <img src={query[1].image} className="w-10 h-10"></img>
-                            <p className={"duration-300 " + (query[0] == activePageId && "text-xl")}>{query[1].date}</p>
+                        <div key={query.id} onClick={() => {
+                            setActivePageId(query.id);
+                        }} className={"flex justify-between items-center min-w-10 border-2 border-(--color-gray) rounded-lg p-2 hover:scale-102 duration-300 cursor-pointer m-2 " + (query.id == activePageId && "scale-102 bg-[#D9D9D9]")}>
+                            <img src={query.data().image} className="w-10 h-10"></img>
+                            <p className={"duration-300 " + (query.id == activePageId && "text-xl")}>Query {query.data().timestamp}</p>
                         </div>
                     )
                 })}

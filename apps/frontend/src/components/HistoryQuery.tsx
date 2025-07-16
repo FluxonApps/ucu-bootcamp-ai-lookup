@@ -1,16 +1,15 @@
 import { getAuth } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useState, useEffect } from 'react';
-import { doc, getDoc } from 'firebase/firestore';
+import { query, collection, where, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase.config.ts';
 
 const auth = getAuth();
 
 export function HistoryQuery({ historyPageId }) {
     const getHistoryPageData = async () => {
-        const dbUser = doc(db, 'users', user?.uid);
-        const dbUserData = await getDoc(dbUser);
-        return dbUserData.data()?.history[historyPageId];
+        const dbQueries = collection(db, "queries");
+        return (await getDocs(query(dbQueries, where("__name__", "==", historyPageId)))).docs[0];
     }
 
     const [user, userLoading] = useAuthState(auth);
@@ -35,7 +34,7 @@ export function HistoryQuery({ historyPageId }) {
     return (
         <div className={"h-screen grow duration-300 w-[100%]"}>
             <div>
-                History query data page {historyPageData && historyPageData.date}
+                History query data page {historyPageData && historyPageData.data().timestamp}
             </div>
         </div>
     );

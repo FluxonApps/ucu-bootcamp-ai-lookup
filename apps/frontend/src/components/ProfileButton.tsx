@@ -1,14 +1,13 @@
 import { Link } from 'react-router';
 
-import gradientBackground from '../assets/gradient-background.png';
-import transparentDefaultUserPicture from '../assets/transparent-default-user.png';
+import accountCircle from '../assets/account-circle.png';
 
 export function ProfileButton() {
     return (
         <Link to="/profile">
-            <div className="w-16 h-16 cursor-pointer hover:scale-110 duration-300 relative">
-                <img className="w-16 h-16 rounded-2xl" src={gradientBackground}/>
-                <img className="w-10 h-10 rounded-2xl z-10 top-3 right-3 absolute" src={transparentDefaultUserPicture}/>
+            <div className="cursor-pointer hover:scale-110 duration-300 relative">
+                <img className="w-10 h-10 rounded-full bg-(--color-dark-green)"/>
+                <img className="w-8 h-8 rounded-2xl z-10 top-1 left-1 absolute" src={accountCircle}/>
             </div>
         </Link>
     );
