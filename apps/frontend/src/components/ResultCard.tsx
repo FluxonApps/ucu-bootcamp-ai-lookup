@@ -24,7 +24,7 @@ export default function ResultCard({ url, price, currency, name_of_website, imag
     // window.location.href =  url;
     window.open(url, '_blank');
   };
-  const [isFullNameShown, doShowFullName] = useState(false);
+  const [isFullNameShown, setIsFullNameShown] = useState(false);
   return (
     <div className="w-full aspect-[7/8] bg-white-background flex flex-col overflow-hidden rounded-xs pb-1 text-[12px] lg:text-[16px]">
       <div className="flex-1 relative cursor-pointer" onClick={goToWebsite}>
