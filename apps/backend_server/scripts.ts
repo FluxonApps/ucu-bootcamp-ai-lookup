@@ -38,7 +38,7 @@ type ResultItem = {
 };
 type CurrencyCode = keyof typeof priceCourse;
 
-type MainResult = {
+export type MainResult = {
   similarListings: ResultItem[];
 };
 const priceCourse = {
