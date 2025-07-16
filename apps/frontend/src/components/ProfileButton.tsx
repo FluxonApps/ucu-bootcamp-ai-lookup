@@ -6,7 +6,7 @@ import transparentDefaultUserPicture from '../assets/transparent-default-user.pn
 export function ProfileButton() {
     return (
         <Link to="/profile">
-            <div className="w-16 h-16 cursor-pointer hover:scale-110 duration-300 fixed top-5 right-5">
+            <div className="w-16 h-16 cursor-pointer hover:scale-110 duration-300 relative">
                 <img className="w-16 h-16 rounded-2xl" src={gradientBackground}/>
                 <img className="w-10 h-10 rounded-2xl z-10 top-3 right-3 absolute" src={transparentDefaultUserPicture}/>
             </div>
