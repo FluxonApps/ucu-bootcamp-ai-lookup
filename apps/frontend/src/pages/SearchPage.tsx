@@ -11,7 +11,7 @@ import { useState } from 'react';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase.config.ts';
 import testPicture from '../assets/default-user.jpg';
-
+import ResultGrid from '../components/ResultGrid.tsx';
 const auth = getAuth();
 
 const SearchPage = () => {
@@ -29,31 +29,33 @@ const SearchPage = () => {
     return <Navigate to="/auth" replace />;
   }
 
-  const processQuery = async queryData => {
+  const processQuery = async (queryData) => {
     // here queryData must be processed and links to needed images must be saved
     const dbUser = doc(db, 'users', user?.uid);
     const dbUserData = await getDoc(dbUser);
     const newId = new Date().getTime();
     let historyObj = dbUserData.data()?.history;
     historyObj[newId] = {
-      date: "Query " + (Object.entries(historyObj).length + 1),
-      image: testPicture
-    }
+      date: 'Query ' + (Object.entries(historyObj).length + 1),
+      image: testPicture,
+    };
     await updateDoc(dbUser, { history: historyObj });
     setActivePage(newId);
-  }
+  };
 
   return (
-
-
     <div className="justify-center">
       <ProfileButton />
-      <HistoryButton callback={isOpened => setSidebarOpened(isOpened)} />
+      <HistoryButton callback={(isOpened) => setSidebarOpened(isOpened)} />
       <Sidebar isOpened={isSidebarOpened} history={history} activePage={activePage} setActivePage={setActivePage} />
-      {activePage == -1
-      ? <ActiveQuery processQuery={processQuery} />
-      : <HistoryQuery historyPage={activePage} newQueryCallback={() => setActivePage(-1)} />}
-      <ImageProcessing userName={user.displayName} />
+      {activePage == -1 ? (
+        <ActiveQuery processQuery={processQuery} />
+      ) : (
+        <HistoryQuery historyPage={activePage} newQueryCallback={() => setActivePage(-1)} />
+      )}
+      {/* <ImageProcessing userName={user.displayName} />
+       */}
+      <ResultGrid />
     </div>
   );
 };
