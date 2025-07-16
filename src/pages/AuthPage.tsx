@@ -98,7 +98,6 @@ const AuthPage = () => {
   
 
 
-  // Check if user is already signed in. If yes, redirect to main app.
   const isMobile = useIsMobile();
   if (user) {
     return <Navigate to="/search" replace />;
@@ -106,11 +105,9 @@ const AuthPage = () => {
 
   if (isMobile) {
     return (
-      <div className="min-h-screen font-['poppins']" style={{ backgroundColor: '#F3F3F3', fontFamily: 'Poppins, sans-serif' }}>
+      <div className="min-h-screen">
         <div className="max-w-md mx-auto pt-8 px-6">
-          {/* Header Section with Gradient */}
-          <div 
-            className="rounded-2xl p-8 text-white mb-8"
+          <div className="rounded-2xl p-8 text-white mb-8"
             style={{
               background: 'linear-gradient(135deg, #334A40 0%, #617749 50%, #C0D55B 100%)'
             }}
@@ -125,18 +122,17 @@ const AuthPage = () => {
               </div>
             </div>
             <p className="text-lg mb-6 opacity-90">
-              Find visually similar listings online – instantly.
+              Find visually similar listings online - instantly.
             </p>
             <h2 className="text-2xl font-bold mb-4 leading-tight">
               Our app searches for products related to your image across the web.
             </h2>
             <p className="text-base opacity-90">
-              Whether it's fashion, furniture, or gadgets – we've got you covered.
+              Whether it's fashion, furniture, or gadgets - we've got you covered.
             </p>
           </div>
-          {/* Form Section */}
           <form onSubmit={handleAuth}>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">
+            <h2 className="text-3xl font-bold text-gray-900">
               {showSignIn ? 'Welcome back!' : 'Create an account'}
             </h2>
             <p className="mb-6" style={{ color: '#ACC1A4' }}>
@@ -153,7 +149,7 @@ const AuthPage = () => {
                 placeholder="Username"
                 value={username}
                 onChange={handleUsernameChange}
-                className="w-full px-4 py-3 rounded-xl border-2 border-[#ACC1A4] focus:border-[#4A6144] focus:bg-[#B9CE59] focus:outline-none text-gray-700"
+                className="reginput w-full"
                 minLength={6}
                 required
               />
@@ -164,7 +160,7 @@ const AuthPage = () => {
               placeholder="Email"
               value={email}
               onChange={handleEmailChange}
-              className="w-full px-4 py-3 rounded-xl border-2 border-[#ACC1A4] focus:border-[#4A6144] focus:bg-[#B9CE59] focus:outline-none text-gray-700"
+              className="reginput w-full"
               required
             />
             <div className="relative">
@@ -174,7 +170,7 @@ const AuthPage = () => {
                 placeholder="Password"
                 value={password}
                 onChange={handlePasswordChange}
-                className="w-full px-4 py-3 rounded-xl border-2 border-[#ACC1A4] focus:border-[#4A6144] focus:bg-[#B9CE59] focus:outline-none text-gray-700"
+                className="reginput w-full"
                 minLength={6}
                 required
               />
@@ -184,13 +180,12 @@ const AuthPage = () => {
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
                 tabIndex={-1}
               >
-                <img src={`src/assets/eye-${!viewPassword ? "show" : "hide"}.png`} alt="Toggle password" className="w-8 h-8" />
+                <img src={`src/assets/eye-${!viewPassword ? "show" : "hide"}.png`} alt="Toggle password" className="w-6 h-6" />
               </button>
             </div> 
             <button
               type="submit"
-              className="w-full py-3 rounded-xl text-white font-semibold text-lg mt-6 hover:opacity-90 transition-opacity"
-              style={{ backgroundColor: '#4A6144' }}
+              className=" bg-[#4A6144] text-white rounded-[8px] h-[50px] py-2 font-medium hover:bg-[#546B4E] active:bg-[#4C5C48] w-full"
             >
               {!showSignIn ? 'Register' : 'Login'}
             </button>
@@ -199,14 +194,14 @@ const AuthPage = () => {
           <div className="mt-6">
             <div
               onClick={handleGoogleAuth}
-              className="w-full py-3 rounded-xl text-white font-semibold text-lg flex items-center justify-center gap-3 hover:opacity-90 transition-opacity cursor-pointer"
-              style={{ backgroundColor: '#4A6144' }}
+              className="bg-[#4A6144] text-white rounded-[8px] h-[50px] py-2 font-medium hover:bg-[#546B4E] active:bg-[#4C5C48] flex justify-center items-center gap-2"
             >
               <img src="src/assets/google_icon.png" alt="Google" className="w-5 h-5" />
               Continue with Google
             </div>
           </div>
         </form>
+        <div className='h-5'></div>
       </div>
     </div>
   );
@@ -233,7 +228,7 @@ const AuthPage = () => {
         </div>
 
           <form className="flex items-center" onSubmit={handleAuth}>
-            <div className="flex flex-col gap-4 w-[390px]  xl:w-[450px] rounded-md ml-6 pr-16 py-8">
+            <div className="flex flex-col gap-4 w-[390px] xl:w-[450px] rounded-md ml-6 pr-16 py-8">
               <h2 className="text-[42px] font-semibold tracking-tight text-[#2E2E2E]">{showSignIn ? 'Welcome back!' : 'Create an account'}</h2>
               <span className='text-[#ACC1A4] text-md '>{showSignIn ? 'Create a new account? ' : 'Already have an account? '}<span className='text-[#4A6144] underline cursor-pointer'  onClick={switchAuthMode} >{showSignIn ? 'Sign up' : "Log in"}</span></span>
               {!showSignIn && <input
