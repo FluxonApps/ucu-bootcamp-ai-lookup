@@ -5,6 +5,7 @@
   --font-poppins: 'Poppins', sans-serif;
   --color-white-background: #f3f3f3;
   --color-dark-green: #4a6144;
+  --color-gray: #d9d9d9
 }
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;

@@ -4,7 +4,7 @@ export function GreenLogo() {
     return (
         <div className={"flex gap-1"}>
             <img src={greenLogo}></img>
-            <p className="text-[#4A6144] text-[32px]">lookit</p>
+            <p className="text-(--color-dark-green) text-[32px] translate-y-0.5">lookit</p>
         </div>
     );
 }

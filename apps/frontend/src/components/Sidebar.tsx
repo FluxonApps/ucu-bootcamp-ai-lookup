@@ -43,7 +43,7 @@ export function Sidebar({ isOpened, activePageId, setActivePageId, closeBtnCallb
                     return (
                         <div key={i} onClick={() => {
                             setActivePageId(query[0]);
-                        }} className={"flex justify-between items-center min-w-10 border-2 border-[#D9D9D9] rounded-lg p-2 hover:scale-102 duration-300 cursor-pointer m-2 " + (query[0] == activePageId && "scale-102 bg-[#D9D9D9]")}>
+                        }} className={"flex justify-between items-center min-w-10 border-2 border-(--color-gray) rounded-lg p-2 hover:scale-102 duration-300 cursor-pointer m-2 " + (query[0] == activePageId && "scale-102 bg-[#D9D9D9]")}>
                             <img src={query[1].image} className="w-10 h-10"></img>
                             <p className={"duration-300 " + (query[0] == activePageId && "text-xl")}>{query[1].date}</p>
                         </div>
@@ -51,7 +51,7 @@ export function Sidebar({ isOpened, activePageId, setActivePageId, closeBtnCallb
                 })}
                 <div onClick={() => {
                     setActivePageId(-1);
-                }} className={"flex justify-between items-center min-w-10 border-2 border-[#D9D9D9] rounded-lg p-2 hover:scale-102 duration-300 cursor-pointer m-2 " + (activePageId == -1 && "scale-102 bg-[#D9D9D9]")}>
+                }} className={"flex justify-between items-center min-w-10 border-2 border-(--color-gray) rounded-lg p-2 hover:scale-102 duration-300 cursor-pointer m-2 " + (activePageId == -1 && "scale-102 bg-[#D9D9D9]")}>
                     <img src={addQuerySign} className="w-10 h-10"></img>
                     <p className={"duration-300 " + (activePageId == -1 && "text-xl")}>Make new query</p>
                 </div>

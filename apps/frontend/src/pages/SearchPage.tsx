@@ -44,9 +44,14 @@ const SearchPage = () => {
   }
 
   return (
-    <div className={"flex flex-col duration-300 h-screen " + (isSidebarOpened && "ml-100")}>
-      <HistoryButton toggleCallback={isOpened => setSidebarOpened(isOpened)} stateOpened={false}></HistoryButton>
-      <ProfileButton></ProfileButton>
+    <div className={"flex flex-col duration-300 h-screen bg-(--color-white-background) " + (isSidebarOpened && "ml-100")}>
+      <div className="flex justify-between p-5">
+        <div>
+          <HistoryButton toggleCallback={isOpened => setSidebarOpened(isOpened)} stateOpened={false}></HistoryButton>
+        </div>
+        <GreenLogo></GreenLogo>
+        <ProfileButton></ProfileButton>
+      </div>
       <Sidebar
       isOpened={isSidebarOpened}
       activePageId={activePage}
