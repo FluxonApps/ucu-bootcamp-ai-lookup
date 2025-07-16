@@ -9,6 +9,16 @@ import { Navigate } from 'react-router';
 
 import { db, app } from '../../firebase.config.ts';
 
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < breakpoint);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, [breakpoint]);
+  return isMobile;
+}
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider()
 
@@ -89,10 +99,118 @@ const AuthPage = () => {
 
 
   // Check if user is already signed in. If yes, redirect to main app.
+  const isMobile = useIsMobile();
   if (user) {
     return <Navigate to="/search" replace />;
   }
 
+  if (isMobile) {
+    return (
+      <div className="min-h-screen font-['poppins']" style={{ backgroundColor: '#F3F3F3', fontFamily: 'Poppins, sans-serif' }}>
+        <div className="max-w-md mx-auto pt-8 px-6">
+          {/* Header Section with Gradient */}
+          <div 
+            className="rounded-2xl p-8 text-white mb-8"
+            style={{
+              background: 'linear-gradient(135deg, #334A40 0%, #617749 50%, #C0D55B 100%)'
+            }}
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <img src="src/assets/logowhite.png" alt="Search" className="w-12 h-12" />
+              <div>
+                <span className="text-2xl font-bold">Welcome to </span>
+                <span className="bg-white px-3 py-1 rounded-lg text-2xl font-bold" style={{ color: '#4A6144' }}>
+                  Lookit
+                </span>
+              </div>
+            </div>
+            <p className="text-lg mb-6 opacity-90">
+              Find visually similar listings online – instantly.
+            </p>
+            <h2 className="text-2xl font-bold mb-4 leading-tight">
+              Our app searches for products related to your image across the web.
+            </h2>
+            <p className="text-base opacity-90">
+              Whether it's fashion, furniture, or gadgets – we've got you covered.
+            </p>
+          </div>
+          {/* Form Section */}
+          <form onSubmit={handleAuth}>
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">
+              {showSignIn ? 'Welcome back!' : 'Create an account'}
+            </h2>
+            <p className="mb-6" style={{ color: '#ACC1A4' }}>
+              {showSignIn ? 'Create a new account? ' : 'Already have an account? '}
+              <span className="text-[#4A6144] underline cursor-pointer" onClick={switchAuthMode}>
+                {showSignIn ? 'Sign up' : "Log in"}
+              </span>
+            </p>
+          <div className="space-y-4">
+            {!showSignIn && (
+              <input
+                type="text"
+                name="username"
+                placeholder="Username"
+                value={username}
+                onChange={handleUsernameChange}
+                className="w-full px-4 py-3 rounded-xl border-2 border-[#ACC1A4] focus:border-[#4A6144] focus:bg-[#B9CE59] focus:outline-none text-gray-700"
+                minLength={6}
+                required
+              />
+            )}
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={email}
+              onChange={handleEmailChange}
+              className="w-full px-4 py-3 rounded-xl border-2 border-[#ACC1A4] focus:border-[#4A6144] focus:bg-[#B9CE59] focus:outline-none text-gray-700"
+              required
+            />
+            <div className="relative">
+              <input
+                type={viewPassword ? 'text' : 'password'}
+                name="password"
+                placeholder="Password"
+                value={password}
+                onChange={handlePasswordChange}
+                className="w-full px-4 py-3 rounded-xl border-2 border-[#ACC1A4] focus:border-[#4A6144] focus:bg-[#B9CE59] focus:outline-none text-gray-700"
+                minLength={6}
+                required
+              />
+              <button
+                type="button"
+                onClick={() => setViewPass(!viewPassword)}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                tabIndex={-1}
+              >
+                <img src={`src/assets/eye-${!viewPassword ? "show" : "hide"}.png`} alt="Toggle password" className="w-8 h-8" />
+              </button>
+            </div> 
+            <button
+              type="submit"
+              className="w-full py-3 rounded-xl text-white font-semibold text-lg mt-6 hover:opacity-90 transition-opacity"
+              style={{ backgroundColor: '#4A6144' }}
+            >
+              {!showSignIn ? 'Register' : 'Login'}
+            </button>
+          </div>
+          <hr className="my-6 border-t" style={{ borderColor: '#ACC1A4', borderWidth: 1 }} />
+          <div className="mt-6">
+            <div
+              onClick={handleGoogleAuth}
+              className="w-full py-3 rounded-xl text-white font-semibold text-lg flex items-center justify-center gap-3 hover:opacity-90 transition-opacity cursor-pointer"
+              style={{ backgroundColor: '#4A6144' }}
+            >
+              <img src="src/assets/google_icon.png" alt="Google" className="w-5 h-5" />
+              Continue with Google
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}                       
   return (
       <div className="flex h-full bg-[#F3F3F3]">
         <div className="w-full backgroundgrad bg-contain bg-no-repeat relative flex flex-col-reverse">
