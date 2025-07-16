@@ -1,6 +1,7 @@
 import { getAuth } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Navigate } from 'react-router';
+import ImageUpload from '../components/ImageUpload.tsx';
 import { ProfileButton } from '../components/ProfileButton.tsx';
 import { HistoryButton } from '../components/HistoryButton.tsx';
 import { Sidebar } from '../components/Sidebar.tsx';
