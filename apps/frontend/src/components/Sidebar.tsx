@@ -11,8 +11,6 @@ export function Sidebar({ isOpened, activePage, setActivePage }) {
     const getHistoryData = async () => {
         const dbUser = doc(db, 'users', user?.uid);
         const dbUserData = await getDoc(dbUser);
-        console.log(dbUserData.data()?.history);
-        
         return dbUserData.data()?.history;
     }
 

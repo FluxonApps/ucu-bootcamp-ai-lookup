@@ -30,6 +30,7 @@ const SearchPage = () => {
   }
 
   const processQuery = async queryData => {
+    // here queryData must be processed and links to needed images must be saved
     const dbUser = doc(db, 'users', user?.uid);
     const dbUserData = await getDoc(dbUser);
     const newId = new Date().getTime();
