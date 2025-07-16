@@ -2,7 +2,6 @@ import { Link } from 'react-router';
 
 import fluxonLogo from '../assets/fluxon-logo.svg';
 import ucuLogo from '../assets/ucu-logo.svg';
-
 import MainLayout from '../components/layout/MainLayout.tsx';
 
 const HomePage = () => {

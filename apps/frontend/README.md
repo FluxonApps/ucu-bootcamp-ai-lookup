@@ -70,8 +70,22 @@ You could do this manually, or via an automated GitHub Actions workflow. Just as
 ## Useful Materials
 
 ### LINKS:
+
 Firebase project: https://console.firebase.google.com/u/4/project/ucu-demo-project/overview
 Figma design file: https://www.figma.com/design/jTdkZgNfiAMwGCxpHY9lRp/Untitled?node-id=0-1&p=f&t=LGhCqmQKcdqnSgVw-0
 PRD document: https://docs.google.com/document/d/1tOFVZL6-Wku7vtw4rzxisLIYC9OdnxfbCN3cENcjDuA/edit?tab=t.0#heading=h.djd578ti9xl
 
+## /backend_server usage tutorial:
 
+Go inside apps/backend_server \
+run `npm install` -> `npm run build` -> `npm start` \
+Go to `http://localhost:3131/scrape` \
+Manually provide a url for testing in the following way:
+`http://localhost:3131/scrape/?url=` \
+Wait a few seconds for a response.
+
+## /frontend usage tutorial
+
+go inside apps/frontend \
+run `npm run dev`.
+Boom
