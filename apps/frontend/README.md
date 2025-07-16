@@ -1,12 +1,6 @@
-# Fluxon x UCU Bootcamp project template `💫🪐☄️`
+# /Name of the project/ `💫🪐☄️`
 
-Welcome to the Fluxon x UCU Bootcamp 2025! 👋👋👋
-
-This is a Bootcamp project template. It contains minimal web app setup and doesn't contain anything related to your _actual_ project. You are going to be building your app on top of this template. Thus, please _change anything_ in this repository at your will in order to build your cool project! Start with this README - replace this with your project's title and description!
-
-Overall, this README file is here to help you understand what we're dealing with, set up your machine for development, and provide some useful materials for learning web technologies.
-
----
+/Description of the project/
 
 Technologies used:
 
@@ -15,21 +9,6 @@ Technologies used:
 - [Firebase](https://firebase.google.com/docs) - authentication functionality (Firebase Auth), database (Firestore), web app hosting (Firebase Hosting). Basically, it serves as the backend for our app
 - [Tailwind CSS](https://tailwindcss.com/) - CSS framework
 - [Vite](https://vitejs.dev/) - bundler, a tool that takes all the source code files and compiles them together to build the app 🛠️
-
-## Development
-
-Before starting your work on this project, we need to do a couple of steps to set up your tooling.
-
-This list will help you set up your machine for local development.
-
-### Prerequisites
-
-Initial steps you might have already done during your study at UCU:
-
-- You should have a GitHub account. A cool username is a requirement, too 😎
-- Install Git: https://github.com/git-guides/install-git. Sending code updates over messengers might work, too; or not...
-- Install a code editor or IDE, such as VSCode: https://code.visualstudio.com/Download
-- Use a shell terminal (bash, zsh, whatever) during the development process. On MacOS and Linux, it is available for you out of the box. On Windows, you have to either install WSL (which is time consuming), or Git Bash. This answer contains some useful links: https://superuser.com/a/1763710
 
 ### Local development setup
 
@@ -90,27 +69,11 @@ You could do this manually, or via an automated GitHub Actions workflow. Just as
 
 ## Useful Materials
 
-> Before you proceed with this section, **REMEMBER THERE ARE NO STUPID OR LAME QUESTIONS**. If you're feeling like you don't know something, this means there's room for improvement – so just say it out loud and your mentor or peers will help you! We're all here to learn something new ([even mentors!](https://github.com/user-attachments/assets/c0c34e3a-8c5b-4bd8-9a8e-41c66bacece5)), so let's actually have a great time together!!!
+### LINKS:
 
-> No, seriously, if there's anything, no matter however "obvious" this thing feels to you, don't be shy asking about it. Otherwise we'll be sad a question died never seeing the world 🥀🥀🥀
-
-Some useful links for learning stuff we're dealing with at Bootcamp:
-
-Web basics, https://internetingishard.netlify.app/ - a GREAT website that can help you better understand HTML & CSS.
-
-JavaScript: https://www.geeksforgeeks.org/introduction-to-javascript/, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Introduction, ask mentor for more.
-
-React.js: official guide https://react.dev/learn, short hints https://devhints.io/react.
-
-Firebase: official guide https://firebase.google.com/docs/web/setup.
-
-Git: cheat sheet https://training.github.com/downloads/github-git-cheat-sheet.pdf.
-
-TailwindCSS: official documentation https://tailwindcss.com/docs/styling-with-utility-classes.
-
-The above list is incomplete, so if you need anything - you know [whom](https://github.com/FluxonApps/ucu-summer-school-project-template/assets/86969397/f93ff07b-f70e-476d-9ed5-14f25d474a53) to ask 😊
-
-**Good luck!**
+Firebase project: https://console.firebase.google.com/u/4/project/ucu-demo-project/overview
+Figma design file: https://www.figma.com/design/jTdkZgNfiAMwGCxpHY9lRp/Untitled?node-id=0-1&p=f&t=LGhCqmQKcdqnSgVw-0
+PRD document: https://docs.google.com/document/d/1tOFVZL6-Wku7vtw4rzxisLIYC9OdnxfbCN3cENcjDuA/edit?tab=t.0#heading=h.djd578ti9xl
 
 ## /backend_server usage tutorial:
 
