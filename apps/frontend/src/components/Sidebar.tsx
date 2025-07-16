@@ -18,7 +18,7 @@ export function Sidebar({ isOpened, activePageId, setActivePageId, closeBtnCallb
         getHistoryData().then(setHistoryData);
     }, [activePageId]);
 
-     // Do not show page content until auth state is fetched.
+    // Do not show page content until auth state is fetched.
     if (userLoading) {
         return null;
     }
