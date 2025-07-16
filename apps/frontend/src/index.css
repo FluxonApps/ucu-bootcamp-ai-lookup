@@ -3,6 +3,8 @@
 
 @theme {
   --font-poppins: 'Poppins', sans-serif;
+  --color-white-background: #f3f3f3;
+  --color-dark-green: #4a6144;
 }
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;

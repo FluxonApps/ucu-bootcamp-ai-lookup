@@ -1,7 +1,6 @@
 import ResultCard from './ResultCard';
 import '../index.css';
 import { CardProps } from './ResultCard';
-// import './ResultGrid.css';
 
 const testCardProps: CardProps = {
   url: 'https://www.2ndstreet.jp/goods/detail/goodsId/2334532349329/shopsId/31056',
@@ -15,7 +14,6 @@ const testCardProps: CardProps = {
 
 export default function ResultGrid() {
   return (
-    // <div className="grid-css-test">
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 h-full overflow-hidden w-full bg-amber-500">
       <ResultCard {...testCardProps} />
       <ResultCard {...testCardProps} />

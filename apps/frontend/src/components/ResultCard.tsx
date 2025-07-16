@@ -24,34 +24,21 @@ export default function ResultCard({ url, price, currency, name_of_website, imag
     // window.location.href =  url;
     window.open(url, '_blank');
   };
-  const [fullName, setFullName] = useState(false);
-  const [hover, setHover] = useState(false);
-  const handleMouseEnter = () => {
-    setHover(true);
-    console.log(hover);
-  };
-  const handleMouseLeave = () => {
-    setHover(false);
-    console.log(hover);
-  };
+  const [isFullNameShown, doShowFullName] = useState(false);
   return (
-    <div
-      className="w-full aspect-[7/8] bg-[#F3F3F3] flex flex-col overflow-hidden rounded-xs pb-1"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
+    <div className="w-full aspect-[7/8] bg-white-background flex flex-col overflow-hidden rounded-xs pb-1 text-[12px] lg:text-[16px]">
       <div className="flex-1 relative cursor-pointer" onClick={goToWebsite}>
         <img
           src={image_url}
-          className={`absolute transform transition-all duration-300 ease-in-out inset-0 w-full h-full object-cover ${hover ? 'scale-102' : 'scale-100 '}`}
+          className={`absolute transform transition-all duration-300 ease-in-out inset-0 w-full h-full object-cover hover:scale-102`}
         />
       </div>
-      <div className="text-[#4A6144] font-poppins flex flex-col px-2 gap-2 pt-1">
+      <div className="text-dark-green font-poppins flex flex-col px-2 gap-2 pt-1">
         <div className="flex justify-between">
-          <div>{title?.slice(0, fullName ? title.length : 20) ?? 'No title'}</div>
+          <div>{title?.slice(0, isFullNameShown ? title.length : 20) ?? 'No title'}</div>
           <button
             onClick={() => {
-              setFullName(!fullName);
+              doShowFullName(!isFullNameShown);
             }}
           >
             ▼
@@ -61,7 +48,7 @@ export default function ResultCard({ url, price, currency, name_of_website, imag
           <p>
             Price:{' '}
             <span className="font-semibold">
-              {conversion[currency as keyof typeof conversion]}
+              {conversion[currency]}
               {price}
             </span>
             {' | '}
