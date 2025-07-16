@@ -18,6 +18,7 @@ export default function ImageProcessing ({userName}:ImageProcessingProps) {
 
   return (
     <>
+    {/* TODO change colors to one color style */}
       {imageUrl && country && (
         <div className="fixed inset-0 flex flex-col justify-center items-center">
           <h1 className="p-1 text-4xl font-bold bg-gradient-to-r from-[#334A40] to-[#C0D55B] bg-clip-text text-transparent">

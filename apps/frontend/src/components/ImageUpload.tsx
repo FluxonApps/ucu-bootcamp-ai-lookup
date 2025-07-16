@@ -2,16 +2,17 @@ import React,{ useRef, useState, useEffect } from 'react';
 import Select from 'react-select';
 
 import { countryOptions } from '../countries_list';
+import { parseUndefinedDef } from 'openai/_vendor/zod-to-json-schema/index.mjs';
 
 type ImageUploadProps = {
   onSearch: (data: { country: string; imageUrl: string }) => void;
 };
 
-const ImageUpload: React.FC<ImageUploadProps> = ({ onSearch }) => {
+const ImageUpload = ({ onSearch } : ImageUploadProps) => {
     const [selectedCountry, setSelectedCountry] = useState({value: "ua", label: "Ukraine" });
 
-    const [selectedFile, setSelectedFile] = useState()
-    const [preview, setPreview] = useState()
+    const [selectedFile, setSelectedFile] = useState<File | undefined>(undefined)
+    const [preview, setPreview] = useState<string | undefined>(undefined)
     const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
