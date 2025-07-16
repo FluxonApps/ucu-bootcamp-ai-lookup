@@ -38,7 +38,7 @@ export default function ResultCard({ url, price, currency, name_of_website, imag
           <div>{title?.slice(0, isFullNameShown ? title.length : 20) ?? 'No title'}</div>
           <button
             onClick={() => {
-              doShowFullName(!isFullNameShown);
+              setIsFullNameShown(!isFullNameShown);
             }}
           >
             ▼
