@@ -13,6 +13,7 @@ export function UserView() {
   const [newEmail, setNewEmail] = useState(user?.email);
   const [newPassword, setNewPassword] = useState("");
   const [signOut, isSigningOut] = useSignOut(auth);
+
   const updateUser = () => {
     updateProfile(user, {
       displayName: newName
@@ -57,6 +58,10 @@ export function UserView() {
           <div className="space-y-4 mb-8">
             <div>
               <input
+                value={newName}
+                onChange={(event) => {
+                  setNewName(event.target.value);
+                }}
                 type="text"
                 name="name"
                 placeholder="Name"
@@ -68,6 +73,10 @@ export function UserView() {
               <input
                 type="email"
                 name="email"
+                value={newEmail}
+                onChange={(event) => {
+                  setNewEmail(event.target.value);
+                }}
                 placeholder="Email"
                 className="w-full px-4 py-3 rounded-lg border-2 border-gray-400 focus:border-[#4A6144] focus:bg-[#B9CE59] focus:outline-none text-[#4A6144] bg-white placeholder-[#4A6144]"
               />
@@ -77,6 +86,10 @@ export function UserView() {
               <input
                 type="password"
                 name="password"
+                value={newPassword}
+                onChange={(event) => {
+                  setNewPassword(event.target.value);
+                }}
                 placeholder="Password"
                 className="w-full px-4 py-3 rounded-lg border-2 border-gray-400 focus:border-[#4A6144] focus:bg-[#B9CE59] focus:outline-none text-[#4A6144] bg-white placeholder-[#4A6144]"
               />
