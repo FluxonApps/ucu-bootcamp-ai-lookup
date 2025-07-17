@@ -8,7 +8,7 @@ import {
 } from 'react-firebase-hooks/auth';
 import { Navigate } from 'react-router';
 
-import { db } from '../../firebase.config.ts';
+import { db } from '../firebase.config.ts';
 
 import MainLayout from '../components/layout/MainLayout.tsx';
 

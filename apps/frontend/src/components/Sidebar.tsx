@@ -3,7 +3,8 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { Navigate } from 'react-router';
 import { doc, getDoc } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
-import { db } from '../../firebase.config.ts';
+import { db } from '../firebase.config.ts';
+
 
 const auth = getAuth();
 

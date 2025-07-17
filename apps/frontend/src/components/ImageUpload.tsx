@@ -1,15 +1,19 @@
 import { useRef, useState, useEffect } from 'react';
+import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
 
 type ImageUploadProps = {
   onUpload: (imageUrl: string) => void;
 };
 
 const ImageUpload = ({ onUpload }: ImageUploadProps) => {
-    const [selectedFile, setSelectedFile] = useState()
     const inputRef = useRef<HTMLInputElement>(null);
+    const [selectedFile, setSelectedFile] = useState()
+    const [preview, setPreview] = useState("")
+    const storage = getStorage()
 
     useEffect(() => {
         if (!selectedFile) {
+            setPreview("")
             return
         }
 
@@ -28,6 +32,16 @@ const ImageUpload = ({ onUpload }: ImageUploadProps) => {
         setSelectedFile(e.target.files[0])
     }
 
+    const handleUpload = async () => {
+        if (!selectedFile) return;
+
+        const fileName = `${Date.now()}_${selectedFile.name}`;
+        const storageRef = ref(storage, `uploads/${fileName}`);
+        await uploadBytes(storageRef, selectedFile);
+        const downloadURL = await getDownloadURL(storageRef);
+        setPreview(downloadURL);
+        console.log("Uploaded and available at:", downloadURL);
+    }
     return (
         <div>
             <button

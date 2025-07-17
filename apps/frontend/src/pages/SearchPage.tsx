@@ -9,7 +9,7 @@ import { ActiveQuery } from '../components/ActiveQuery.tsx';
 import { HistoryQuery } from '../components/HistoryQuery.tsx';
 import { useState } from 'react';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
-import { db } from '../../firebase.config.ts';
+import { db } from '../firebase.config.ts';
 import testPicture from '../assets/default-user.jpg';
 import ResultGrid from '../components/ResultGrid.tsx';
 const auth = getAuth();
@@ -52,6 +52,20 @@ const SearchPage = () => {
         <ActiveQuery processQuery={processQuery} />
       ) : (
         <HistoryQuery historyPage={activePage} newQueryCallback={() => setActivePage(-1)} />
+      )}
+
+      <ProfileButton></ProfileButton>
+      <HistoryButton callback={(isOpened) => setSidebarOpened(isOpened)}></HistoryButton>
+      <Sidebar
+        isOpened={isSidebarOpened}
+        history={history}
+        activePage={activePage}
+        setActivePage={setActivePage}
+      ></Sidebar>
+      {activePage == -1 ? (
+        <ActiveQuery processQuery={processQuery}></ActiveQuery>
+      ) : (
+        <HistoryQuery historyPage={activePage} newQueryCallback={() => setActivePage(-1)}></HistoryQuery>
       )}
       <ImageProcessing userName={user.displayName} />
 
