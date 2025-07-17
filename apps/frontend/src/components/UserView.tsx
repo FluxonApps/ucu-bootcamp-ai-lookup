@@ -1,7 +1,6 @@
 import { getAuth, updateProfile, updateEmail, updatePassword } from 'firebase/auth';
 import { useState } from 'react';
 import { Link } from 'react-router';
-import lookitLogoGreen from '/src/assets/lookit-green-logo.png';
 import defaultUser from '/src/assets/default_user_green.png';
 import { useAuthState, useSignOut } from 'react-firebase-hooks/auth';
 const auth = getAuth();
@@ -44,7 +43,6 @@ export function UserView() {
 
         <div className="text-center mb-8">
           <div className="flex items-center justify-center mb-4">
-            <img src={lookitLogoGreen} alt="Lookit Logo" className="w-10 h-10" />
             <span className="text-2xl font-semibold text-[#4A6144]">
             lookit
             </span>
@@ -97,7 +95,7 @@ export function UserView() {
           </div>
 
 
-          <button
+          <button onClick={updateUser}
             className="w-full py-3 rounded-lg text-white text-lg mb-6 hover:opacity-90 transition-opacity bg-[#4A6144]"
           >
             Change profile info
@@ -112,11 +110,7 @@ export function UserView() {
               Back to main page
             </Link>
             <span>|</span>
-            <button 
-              className="hover:text-gray-800 transition-colors underline text-[#4A6144]"
-            >
-              <button onClick={signOut} disabled={isSigningOut} className="hover:scale-110 duration-300 ease-in-out underline">Sign out</button>
-            </button>
+            <button onClick={signOut} disabled={isSigningOut} className="hover:scale-110 duration-300 text-[#4A6144] ease-in-out underline">Sign out</button>
           </div>
         </div>
       </div>
