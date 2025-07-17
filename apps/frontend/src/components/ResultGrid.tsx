@@ -1,27 +1,22 @@
 import ResultCard from './ResultCard';
 import '../index.css';
-import { CardProps } from './ResultCard';
-
-// test prop
-const testCardProps: CardProps = {
-  url: 'https://www.2ndstreet.jp/goods/detail/goodsId/2334532349329/shopsId/31056',
-  price: 27500,
-  currency: 'jpy',
-  name_of_website: 'www.2ndstreet.jp',
-  image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqiPFf61RrymohGUy50RB_Du3L8Vcbf1whFfPdJquPq3HeQkx9',
-  title:
-    'その他ブランド(ソノタブランド) / SEXTON/コーデュロイスタジャン/XL/コットン/BRD/無地/カナダ製 | 古着の販売・通販ならセカンドストリート',
+import { MainResult } from './imageProcessing';
+type ResultGridProps = {
+  data: MainResult;
 };
 
-// insert map here 
-export default function ResultGrid() {
+export default function ResultGrid({ data }: ResultGridProps) {
+  if (!data?.similarListings) {
+    return <div>No data</div>;
+  }
+  const results = data.similarListings;
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 h-full overflow-hidden w-[97%] p-10 bg-[#D9D9D9]">
-      <ResultCard {...testCardProps} />
-      <ResultCard {...testCardProps} />
-      <ResultCard {...testCardProps} />
-      <ResultCard {...testCardProps} />
-      <ResultCard {...testCardProps} />
+    <div className="flex w-full px-2 justify-center">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3 h-full max-w-250 overflow-hidden">
+        {results.map((result) => {
+          return <ResultCard {...result} />;
+        })}
+      </div>
     </div>
   );
 }
