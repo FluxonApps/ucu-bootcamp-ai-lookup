@@ -52,7 +52,6 @@ const SearchPage = () => {
       {activeQuery == null
       ? <ActiveQuery processQuery={processQuery}></ActiveQuery>
       : <HistoryQuery queryId={activeQuery}></HistoryQuery>}
-      <ResultGrid/>
     </div>
   );
 };
