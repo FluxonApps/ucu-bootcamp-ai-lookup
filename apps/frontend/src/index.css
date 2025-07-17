@@ -6,13 +6,13 @@
   --color-white-background: #f3f3f3 ;
   --color-dark-green: #4a6144 ;
   --color-green-gradient: #334a40 ;
-  --color-yellow-gradient: #cod55b ;
+  --color-yellow-gradient: #c0d55b ;
   --color-grey-buttons: #d9d9d9 ;
   --breakpoint-xl: 1352px
 }
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Poppins", sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -31,4 +31,35 @@ body,
 
 button:not(:disabled) {
   cursor: pointer;
+}
+
+.reginput{
+  border: 2px solid;
+  border-color: #4A6144;
+  border-radius: 8px;
+  height: 50px;
+  padding-left: 20px;
+  background-color: white;
+  color: #4A6144;
+
+}
+
+.reginput::placeholder{
+  color: #4A6144;
+  opacity: 60%;
+}
+
+.reginput:focus, .reginput:active{
+  border: 4px;
+  background-color: #B9CE59;
+  color: #4A6144;
+  border-color: #4A6144 !important; 
+}
+
+.backgroundgrad{
+  /* Rectangle 1 */
+
+  clip-path: polygon(0 0, 100% 0, 83% 100%, 0% 100%);
+  background: linear-gradient(150.86deg, #334A40 22.24%, #617749 61.17%, #C0D55B 96.57%);
+
 }
