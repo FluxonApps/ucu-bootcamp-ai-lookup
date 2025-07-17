@@ -1,5 +1,4 @@
 import ImageUpload from './ImageUpload.tsx';
-import { ProfileButton } from './ProfileButton.tsx';
 import axios from 'axios';
 import { useState } from 'react';
 import { countryOptions } from '../countries_list.ts';
@@ -49,8 +48,8 @@ export default function ImageProcessing({ userName }: ImageProcessingProps) {
       {/* Header - centered horizontally, slightly above center */}
       {/* Centered content block */}
       {!imageUrl && !data && (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-white">
-          <h1 className="text-4xl leading-relaxed font-bold bg-gradient-to-r from-[#334A40] to-[#C0D55B] bg-clip-text text-transparent">
+        <div className="flex flex-col row-end-2 items-center justify-center min-h-4/5 bg-white-background">
+          <h1 className="text-4xl leading-relaxed font-poppins bg-gradient-to-r from-green-gradient to-yellow-gradient bg-clip-text text-transparent">
             Hello, {userName}!
           </h1>
           <ImageUpload onUpload={handleUpload} />
@@ -58,8 +57,8 @@ export default function ImageProcessing({ userName }: ImageProcessingProps) {
       )}
 
       {imageUrl && !country && !data && (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-white">
-          <h1 className="text-4xl leading-relaxed font-bold bg-gradient-to-r from-[#334A40] to-[#C0D55B] bg-clip-text text-transparent">
+        <div className="flex flex-col items-center justify-center min-h-4/5 bg-white-background">
+          <h1 className="text-4xl leading-relaxed font-poppins bg-gradient-to-r from-green-gradient to-yellow-gradient bg-clip-text text-transparent">
             Hello, {userName}!
           </h1>
           <div className="flex w-full max-w-4xl border border-gray-300 rounded-lg p-4 relative">
@@ -83,7 +82,7 @@ export default function ImageProcessing({ userName }: ImageProcessingProps) {
 
               <button
                 onClick={handleSearchClick}
-                className="absolute bottom-0 right-0 mb-2 mr-2 px-4 py-2 bg-gradient-to-r from-green-600 to-green-400 text-black rounded hover:from-green-700 hover:to-green-500 transition"
+                className="absolute bottom-0 right-0 mb-2 mr-2 px-4 py-2 bg-green-gradient text-black rounded hover:bg-dark-green transition"
               >
                 Search
               </button>
@@ -94,7 +93,7 @@ export default function ImageProcessing({ userName }: ImageProcessingProps) {
 
       {/* Processing screen */}
       {imageUrl && country && !data && (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-white">
+        <div className="flex flex-col items-center justify-center min-h-4/5 bg-white-background">
           <h2 className="p-1 text-4xl font-bold bg-gradient-to-r from-[#334A40] to-[#C0D55B] bg-clip-text text-transparent">
             Processing...
           </h2>
