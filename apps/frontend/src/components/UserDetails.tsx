@@ -1,5 +1,5 @@
 import { doc } from 'firebase/firestore';
-import { db } from '../../firebase.config.ts';
+import { db } from '../firebase.config.ts';
 import { useDocument } from 'react-firebase-hooks/firestore';
 
 interface UserDetailsProps {
