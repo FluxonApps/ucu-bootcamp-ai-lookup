@@ -72,7 +72,7 @@ export function Sidebar({
                     <img src={addQuerySign} className="w-10 h-10" />
                     <p
                         className={
-                            "duration-300 " + (activeQueryId == null && "text-lg lg:text-xl")
+                            "duration-300 text-center " + (activeQueryId == null && "text-lg lg:text-xl")
                         }
                     >
                         Make new query
@@ -97,7 +97,7 @@ export function Sidebar({
                             }
                         >
                             <img src={data.image} className="w-10 h-10" />
-                            <p className={"duration-300 " + (isActive && "text-lg lg:text-xl")}>
+                            <p className={"duration-300 text-center " + (isActive && "text-lg lg:text-xl")}>
                                 Query {data.timestamp}
                             </p>
                         </div>

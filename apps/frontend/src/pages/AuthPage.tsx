@@ -124,10 +124,10 @@ const AuthPage = () => {
               minLength={6}
               required
             />
-            <button type="submit" disabled={loading} className="bg-blue-400 rounded-lg py-2 font-medium">
+            <button type="submit" disabled={Boolean(loading)} className="bg-blue-400 rounded-lg py-2 font-medium">
               Submit
             </button>
-            <button className="mt-4 text-sm text-black text-slate-400" onClick={switchAuthMode} disabled={loading}>
+            <button className="mt-4 text-sm text-black text-slate-400" onClick={switchAuthMode} disabled={Boolean(loading)}>
               {showSignIn ? 'Create a new account?' : 'Already have an account?'}
             </button>
           </div>
