@@ -2,7 +2,12 @@ import { GreenLogo } from '../components/GreenLogo.tsx';
 import { ProfileButton } from '../components/ProfileButton.tsx';
 import { HistoryButton } from '../components/HistoryButton.tsx';
 
-export function Header({ isSidebarOpened, setSidebarOpened }) {
+export type HeaderType = {
+  isSidebarOpened: boolean;
+  setSidebarOpened: Function;
+};
+
+export function Header({ isSidebarOpened, setSidebarOpened }: HeaderType) {
     return (
         <div className="flex justify-between items-center p-5">
             <div className={isSidebarOpened ? "scale-0" : ""}>

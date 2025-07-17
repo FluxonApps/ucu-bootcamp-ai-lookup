@@ -6,7 +6,7 @@ import { ActiveQuery } from '../components/ActiveQuery.tsx';
 import { HistoryQuery } from '../components/HistoryQuery.tsx';
 import { Header } from '../components/Header.tsx';
 import { useState } from 'react';
-import { doc, getDoc, updateDoc, query, collection, where, addDoc } from 'firebase/firestore';
+import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase.config.ts';
 import testPicture from '../assets/default-user.jpg';
 const auth = getAuth();
@@ -26,7 +26,7 @@ const SearchPage = () => {
     return <Navigate to="/auth" replace />;
   }
 
-  const processQuery = async (queryData) => {
+  const processQuery = async (queryData: Object) => {
     // here queryData must be processed and links to needed images must be saved
     const dbQueries = collection(db, "queries");
     const addedDocProps = await addDoc(dbQueries, {
