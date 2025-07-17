@@ -6,15 +6,15 @@ import { countryOptions } from '../countries_list.ts';
 import Select from 'react-select';
 import ResultGrid from './ResultGrid.tsx';
 
-type ResultItem = {
+export type ResultItem = {
   url: string;
   price: number | null;
-  currency: string | null;
+  currency: string;
   name_of_website: string;
   image_url?: string;
   title?: string;
 };
-type MainResult = {
+export type MainResult = {
   similarListings: ResultItem[];
 };
 type ImageProcessingProps = {

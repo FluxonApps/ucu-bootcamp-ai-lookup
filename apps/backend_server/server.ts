@@ -8,7 +8,13 @@ const app = express();
 
 const PORT = Number(process.env.PORT);
 
-app.use(cors());
+app.use(
+  cors({
+    origin: '*',
+    methods: ['GET'],
+    allowedHeaders: ['Content-Type'],
+  }),
+);
 
 app.get('/', (req, res) => {
   res.redirect('/scrape');

@@ -1,13 +1,5 @@
-import { useState } from 'react';
+import { ResultItem } from './imageProcessing';
 
-export type CardProps = {
-  url: string;
-  price: number;
-  currency: Currency;
-  name_of_website: string;
-  image_url: string;
-  title: string;
-};
 type Currency = 'usd' | 'uah' | 'eur' | 'gbp' | 'cny' | 'jpy';
 
 const conversion: Record<Currency, string> = {
@@ -19,7 +11,7 @@ const conversion: Record<Currency, string> = {
   jpy: '¥',
 };
 
-export default function ResultCard({ url, price, currency, name_of_website, image_url, title }: CardProps) {
+export default function ResultCard({ url, price, currency, name_of_website, image_url, title }: ResultItem) {
   const goToWebsite = () => {
     // window.location.href =  url;
     window.open(url, '_blank');
@@ -40,7 +32,7 @@ export default function ResultCard({ url, price, currency, name_of_website, imag
           <p>
             Price:{' '}
             <span className="font-semibold">
-              {conversion[currency]}
+              {conversion[currency as Currency]}
               {price}
             </span>
             {' | '}
