@@ -17,7 +17,7 @@ import addQuerySign from "../assets/plus.png";
 
 const auth = getAuth();
 
-interface QueryData {
+export type QueryData = {
     image: string;
     timestamp: number;
     userId: string;
@@ -77,15 +77,14 @@ export function Sidebar({
                         <img src={historyLogo} className="h-10" />
                         <h1 className="text-2xl lg:text-3xl -translate-y-0.5">History</h1>
                     </div>
-                    <HistoryButton toggleCallback={closeBtnCallback} stateOpened={true} />
+                    <HistoryButton toggleCallback={closeBtnCallback} stateHistoryOpened={true} />
                 </div>
 
-                {/* "Make new query" button */}
                 <div
                     onClick={() => setActiveQueryId(null)}
                     className={
-                        "flex justify-between items-center min-w-10 border-2 border-(--color-gray) rounded-lg p-2 hover:scale-102 duration-300 cursor-pointer m-2 " +
-                        (activeQueryId == null && "lg:scale-102 bg-(--color-gray)")
+                        "flex justify-between items-center min-w-10 border-2 border-(--color-grey-buttons) rounded-lg p-2 hover:scale-102 duration-300 cursor-pointer m-2 " +
+                        (activeQueryId == null && "lg:scale-102 bg-(--color-grey-buttons)")
                     }
                 >
                     <img src={addQuerySign} className="w-10 h-10" />
@@ -98,7 +97,6 @@ export function Sidebar({
                     </p>
                 </div>
 
-                {/* History entries */}
                 {historyData.map((queryDoc) => {
                     const data: QueryData | undefined = queryDoc.data();
                     if (!data)
@@ -112,8 +110,8 @@ export function Sidebar({
                             key={queryDoc.id}
                             onClick={() => setActiveQueryId(queryDoc.id)}
                             className={
-                                "flex justify-between items-center min-w-10 border-2 border-(--color-gray) rounded-lg p-2 hover:scale-102 duration-300 cursor-pointer m-2 " +
-                                (isActive && "lg:scale-102 bg-(--color-gray)")
+                                "flex justify-between items-center min-w-10 border-2 border-(--color-grey-buttons) rounded-lg p-2 hover:scale-102 duration-300 cursor-pointer m-2 " +
+                                (isActive && "lg:scale-102 bg-(--color-grey-buttons)")
                             }
                         >
                             <img src={data.image} className="w-10 h-10" />

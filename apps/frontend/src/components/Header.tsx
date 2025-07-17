@@ -11,7 +11,7 @@ export function Header({ isSidebarOpened, setSidebarOpened }: HeaderType) {
     return (
         <div className="flex justify-between items-center p-5">
             <div className={isSidebarOpened ? "scale-0" : ""}>
-                <HistoryButton toggleCallback={setSidebarOpened} stateOpened={false}></HistoryButton>
+                <HistoryButton toggleCallback={setSidebarOpened} stateHistoryOpened={false}></HistoryButton>
             </div>
             <div className="hidden sm:block">
                 <GreenLogo></GreenLogo>
