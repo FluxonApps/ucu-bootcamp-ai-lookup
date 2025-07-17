@@ -1,59 +1,49 @@
-import { useRef, useState, useEffect } from 'react';
-import { ref, uploadBytes, getDownloadURL, getStorage } from 'firebase/storage';
-
+import { useRef, useState, ChangeEvent } from 'react';
+import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
 type ImageUploadProps = {
   onUpload: (imageUrl: string) => void;
 };
 
 const ImageUpload = ({ onUpload }: ImageUploadProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [selectedFile, setSelectedFile] = useState();
-  //   const [preview, setPreview] = useState('');
+  const [uploading, setUploading] = useState(false);
   const storage = getStorage();
 
-  useEffect(() => {
-    if (!selectedFile) {
-      //   setPreview('');
-      return;
+  const handleFileSelect = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    try {
+      const fileName = `${Date.now()}_${file.name}`;
+      const storageRef = ref(storage, fileName);
+      await uploadBytes(storageRef, file);
+      const downloadURL = await getDownloadURL(storageRef);
+      onUpload(downloadURL); // ✅ notify parent
+    } catch (error) {
+      console.error("Upload failed:", error);
+    } finally {
+      setUploading(false);
     }
-    createUrl();
-
-    return;
-  }, [selectedFile]);
-
-  const onSelectFile = (e) => {
-    if (!e.target.files || e.target.files.length === 0) {
-      setSelectedFile(undefined);
-      return;
-    }
-
-    setSelectedFile(e.target.files[0]);
   };
 
-  const createUrl = async () => {
-    if (!selectedFile) return;
-
-    const fileName = `${Date.now()}_${selectedFile.name}`;
-    const storageRef = ref(storage, fileName);
-    await uploadBytes(storageRef, selectedFile);
-    const downloadURL = await getDownloadURL(storageRef);
-    // setPreview(downloadURL);
-    console.log('Uploaded and available at:', downloadURL);
-
-    // setPreview(downloadURL);
-    onUpload(downloadURL);
-    return downloadURL;
-  };
   return (
     <div>
       <button
-        className=" px-6 py-2 bg-[#D9D9D9] text-black font-semibold rounded-lg shadow-md hover:bg-[#c0c0c0] transition"
+        className="px-6 py-2 bg-[#D9D9D9] text-black font-semibold rounded-lg shadow-md hover:bg-[#c0c0c0] transition"
         onClick={() => inputRef.current?.click()}
+        disabled={uploading}
       >
-        Insert picture
+        {uploading ? "Uploading..." : "Insert picture"}
       </button>
 
-      <input type="file" accept="image/*" onChange={onSelectFile} ref={inputRef} className="hidden" />
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleFileSelect}
+        ref={inputRef}
+        className="hidden"
+      />
     </div>
   );
 };
