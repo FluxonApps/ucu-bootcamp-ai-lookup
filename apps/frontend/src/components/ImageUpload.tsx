@@ -1,65 +1,61 @@
 import { useRef, useState, useEffect } from 'react';
-import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL, getStorage } from 'firebase/storage';
 
 type ImageUploadProps = {
   onUpload: (imageUrl: string) => void;
 };
 
 const ImageUpload = ({ onUpload }: ImageUploadProps) => {
-    const inputRef = useRef<HTMLInputElement>(null);
-    const [selectedFile, setSelectedFile] = useState()
-    const [preview, setPreview] = useState("")
-    const storage = getStorage()
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [selectedFile, setSelectedFile] = useState();
+  //   const [preview, setPreview] = useState('');
+  const storage = getStorage();
 
-    useEffect(() => {
-        if (!selectedFile) {
-            setPreview("")
-            return
-        }
+  useEffect(() => {
+    if (!selectedFile) {
+      //   setPreview('');
+      return;
+    }
+    createUrl();
 
-        const objectUrl = URL.createObjectURL(selectedFile)
-        onUpload(objectUrl)
+    return;
+  }, [selectedFile]);
 
-        return () => URL.revokeObjectURL(objectUrl)
-    }, [selectedFile])
-
-    const onSelectFile = e => {
-        if (!e.target.files || e.target.files.length === 0) {
-            setSelectedFile(undefined)
-            return
-        }
-
-        setSelectedFile(e.target.files[0])
+  const onSelectFile = (e) => {
+    if (!e.target.files || e.target.files.length === 0) {
+      setSelectedFile(undefined);
+      return;
     }
 
-    const handleUpload = async () => {
-        if (!selectedFile) return;
+    setSelectedFile(e.target.files[0]);
+  };
 
-        const fileName = `${Date.now()}_${selectedFile.name}`;
-        const storageRef = ref(storage, `uploads/${fileName}`);
-        await uploadBytes(storageRef, selectedFile);
-        const downloadURL = await getDownloadURL(storageRef);
-        setPreview(downloadURL);
-        console.log("Uploaded and available at:", downloadURL);
-    }
-    return (
-        <div>
-            <button
-                className=" px-6 py-2 bg-[#D9D9D9] text-black font-semibold rounded-lg shadow-md hover:bg-[#c0c0c0] transition"
-                onClick={() => inputRef.current?.click()}
-            >
-                Insert picture
-            </button>
+  const createUrl = async () => {
+    if (!selectedFile) return;
 
-            <input
-                type="file"
-                accept="image/*"
-                onChange={onSelectFile}
-                ref={inputRef}
-                className="hidden"
-            />
-        </div>
-    )
-}
+    const fileName = `${Date.now()}_${selectedFile.name}`;
+    const storageRef = ref(storage, `uploads/${fileName}`);
+    await uploadBytes(storageRef, selectedFile);
+    const downloadURL = await getDownloadURL(storageRef);
+    // setPreview(downloadURL);
+    console.log('Uploaded and available at:', downloadURL);
+
+    // setPreview(downloadURL);
+    onUpload(downloadURL);
+    return downloadURL;
+  };
+  return (
+    <div>
+      <button
+        className=" px-6 py-2 bg-[#D9D9D9] text-black font-semibold rounded-lg shadow-md hover:bg-[#c0c0c0] transition"
+        onClick={() => inputRef.current?.click()}
+      >
+        Insert picture
+      </button>
+
+      <input type="file" accept="image/*" onChange={onSelectFile} ref={inputRef} className="hidden" />
+    </div>
+  );
+};
 
 export default ImageUpload;

@@ -1,13 +1,14 @@
+import cors from 'cors';
 import express from 'express';
 import dotenv from 'dotenv';
-
 import ScraperMain from './scripts';
-
 dotenv.config();
 
 const app = express();
 
 const PORT = Number(process.env.PORT);
+
+app.use(cors());
 
 app.get('/', (req, res) => {
   res.redirect('/scrape');

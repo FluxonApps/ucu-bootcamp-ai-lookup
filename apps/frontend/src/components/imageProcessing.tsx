@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { countryOptions } from '../countries_list.ts';
 import Select from 'react-select';
+import ResultGrid from './ResultGrid.tsx';
 
 type ResultItem = {
   url: string;
@@ -103,7 +104,7 @@ export default function ImageProcessing({ userName }: ImageProcessingProps) {
         </div>
       )}
 
-      {data && <p>display data as a grid</p>}
+      {data && <ResultGrid />}
     </>
   );
 }
