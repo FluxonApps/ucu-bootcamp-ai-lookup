@@ -34,7 +34,7 @@ const ImageUpload = ({ onUpload }: ImageUploadProps) => {
     if (!selectedFile) return;
 
     const fileName = `${Date.now()}_${selectedFile.name}`;
-    const storageRef = ref(storage, `uploads/${fileName}`);
+    const storageRef = ref(storage, fileName);
     await uploadBytes(storageRef, selectedFile);
     const downloadURL = await getDownloadURL(storageRef);
     // setPreview(downloadURL);

@@ -22,7 +22,8 @@ type ImageProcessingProps = {
 };
 
 async function fetchDataFromAPI(url: string, country?: string): Promise<MainResult> {
-  const endpointUrl = 'https://ucu-bootcamp-ai-lookup-backend.onrender.com/scrape/?url=';
+  //   const endpointUrl = 'https://ucu-bootcamp-ai-lookup-backend.onrender.com/scrape/?url=';
+  const endpointUrl = 'http://localhost:3131/scrape/?url=';
   const response = await axios.get(endpointUrl + url);
   return response.data;
 }
@@ -104,7 +105,7 @@ export default function ImageProcessing({ userName }: ImageProcessingProps) {
         </div>
       )}
 
-      {data && <ResultGrid />}
+      {data && <ResultGrid data={data} />}
     </>
   );
 }
