@@ -2,6 +2,7 @@ import ResultCard from './ResultCard';
 import '../index.css';
 import { CardProps } from './ResultCard';
 
+// test prop
 const testCardProps: CardProps = {
   url: 'https://www.2ndstreet.jp/goods/detail/goodsId/2334532349329/shopsId/31056',
   price: 27500,
@@ -12,26 +13,15 @@ const testCardProps: CardProps = {
     'その他ブランド(ソノタブランド) / SEXTON/コーデュロイスタジャン/XL/コットン/BRD/無地/カナダ製 | 古着の販売・通販ならセカンドストリート',
 };
 
+// insert map here 
 export default function ResultGrid() {
   return (
-    <div className="flex w-full px-2 justify-center">
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3 h-full max-w-250 overflow-hidden">
-        <ResultCard {...testCardProps} />
-        <ResultCard {...testCardProps} />
-        <ResultCard {...testCardProps} />
-        <ResultCard {...testCardProps} />
-        <ResultCard {...testCardProps} />
-        <ResultCard {...testCardProps} />
-        <ResultCard {...testCardProps} />
-        <ResultCard {...testCardProps} />
-        <ResultCard {...testCardProps} />
-        <ResultCard {...testCardProps} />
-        <ResultCard {...testCardProps} />
-        <ResultCard {...testCardProps} />
-        <ResultCard {...testCardProps} />
-        <ResultCard {...testCardProps} />
-        <ResultCard {...testCardProps} />
-      </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 h-full overflow-hidden w-[97%] p-10 bg-[#D9D9D9]">
+      <ResultCard {...testCardProps} />
+      <ResultCard {...testCardProps} />
+      <ResultCard {...testCardProps} />
+      <ResultCard {...testCardProps} />
+      <ResultCard {...testCardProps} />
     </div>
   );
 }

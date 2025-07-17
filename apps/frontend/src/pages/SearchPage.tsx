@@ -9,6 +9,8 @@ import { useState } from 'react';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase.config.ts';
 import testPicture from '../assets/default-user.jpg';
+import ResultCard from '../components/ResultCard.tsx';
+import ResultGrid from '../components/ResultGrid.tsx';
 
 const auth = getAuth();
 
