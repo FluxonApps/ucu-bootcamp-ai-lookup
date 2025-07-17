@@ -14,7 +14,7 @@ export function ActiveQuery({ processQuery }: ActiveQueryType) {
 
     return (
         <div className={"h-screen grow duration-300 w-[100%]"}>
-            <ImageProcessing userName={user.displayName}/>
+            <ImageProcessing userName={user.displayName} processQuery={processQuery}/>
         </div>
     );
 }

@@ -86,6 +86,8 @@ export function Sidebar({
                         return "";
                     }
                     const isActive = queryDoc.id === activeQueryId;
+                    console.log(data);
+                    
 
                     return (
                         <div
@@ -98,7 +100,7 @@ export function Sidebar({
                         >
                             <img src={data.image} className="w-10 h-10" />
                             <p className={"duration-300 text-center " + (isActive && "text-lg lg:text-xl")}>
-                                Query {data.timestamp}
+                                {/*data.obtainedData.similarListings[0].title*/}
                             </p>
                         </div>
                     );

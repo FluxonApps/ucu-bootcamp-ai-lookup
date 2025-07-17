@@ -18,6 +18,7 @@ export type MainResult = {
 };
 type ImageProcessingProps = {
   userName: string | null;
+  processQuery: Function;
 };
 
 async function fetchDataFromAPI(url: string, country?: string): Promise<MainResult> {
@@ -26,7 +27,7 @@ async function fetchDataFromAPI(url: string, country?: string): Promise<MainResu
   return response.data;
 }
 
-export default function ImageProcessing({ userName }: ImageProcessingProps) {
+export default function ImageProcessing({ userName, processQuery }: ImageProcessingProps) {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
 
   const [selectedCountry, setSelectedCountry] = useState({ value: 'ua', label: 'Ukraine' });
@@ -41,6 +42,10 @@ export default function ImageProcessing({ userName }: ImageProcessingProps) {
     setCountry(selectedCountry.value);
     const fetchedData = await fetchDataFromAPI(imageUrl!);
     setData(fetchedData);
+    processQuery({
+      originalImg: imageUrl,
+      obtainedData: fetchedData
+    });
   };
 
   return (
