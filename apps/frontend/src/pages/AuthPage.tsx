@@ -122,7 +122,7 @@ const AuthPage = () => {
               </div>
             </div>
             <p className="text-lg mb-6 opacity-90">
-              Find visually similar listings online - instantly.
+              Find a better price for a product online - instantly.
             </p>
             <h2 className="text-2xl font-bold mb-4 leading-tight">
               Our app searches for products related to your image across the web.
