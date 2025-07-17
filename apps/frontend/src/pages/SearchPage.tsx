@@ -17,7 +17,7 @@ const auth = getAuth();
 const SearchPage = () => {
   const [user, userLoading] = useAuthState(auth);
   const [isSidebarOpened, setSidebarOpened] = useState(false);
-  const [activePage, setActivePage] = useState(-1);
+  const [activeQuery, setActiveQuery] = useState<string | null>(null);
 
   // Do not show page content until auth state is fetched.
   if (userLoading) {
@@ -37,26 +37,29 @@ const SearchPage = () => {
       userId: user.uid,
       timestamp: new Date().getTime()
     });
-    setActivePage(addedDocProps.id);
+    
+    setActiveQuery(addedDocProps.id);
   }
 
   return (
-    <div className={"flex flex-col duration-300 h-screen bg-(--color-white-background) " + (isSidebarOpened && "ml-100")}>
+    <div className={"flex flex-col duration-300 h-screen bg-(--color-white-background) " + (isSidebarOpened && "ml-55 lg:ml-100")}>
       <div className="flex justify-between items-center p-5">
-        <div>
+        <div className={isSidebarOpened ? "scale-0" : ""}>
           <HistoryButton toggleCallback={setSidebarOpened} stateOpened={false}></HistoryButton>
         </div>
-        <GreenLogo></GreenLogo>
+        <div className="hidden sm:block">
+          <GreenLogo></GreenLogo>
+        </div>
         <ProfileButton></ProfileButton>
       </div>
       <Sidebar
       isOpened={isSidebarOpened}
-      activePageId={activePage}
-      setActivePageId={setActivePage}
+      activeQueryId={activeQuery}
+      setActiveQueryId={setActiveQuery}
       closeBtnCallback={setSidebarOpened}/>
-      {activePage == -1
+      {activeQuery == null
       ? <ActiveQuery processQuery={processQuery}></ActiveQuery>
-      : <HistoryQuery historyPageId={activePage}></HistoryQuery>}
+      : <HistoryQuery historyPageId={activeQuery}></HistoryQuery>}
     </div>
   );
 };
