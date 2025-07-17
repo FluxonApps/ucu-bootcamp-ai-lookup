@@ -9,7 +9,7 @@ import { HistoryQuery } from '../components/HistoryQuery.tsx';
 import { GreenLogo } from '../components/GreenLogo.tsx';
 import { useState } from 'react';
 import { doc, getDoc, updateDoc, query, collection, where, addDoc } from 'firebase/firestore';
-import { db } from '../../firebase.config.ts';
+import { db } from '../firebase.config.ts';
 import testPicture from '../assets/default-user.jpg';
 
 const auth = getAuth();
@@ -29,7 +29,7 @@ const SearchPage = () => {
     return <Navigate to="/auth" replace />;
   }
 
-  const processQuery = async queryData => {
+  const processQuery = async (queryData) => {
     // here queryData must be processed and links to needed images must be saved
     const dbQueries = collection(db, "queries");
     const addedDocProps = await addDoc(dbQueries, {
