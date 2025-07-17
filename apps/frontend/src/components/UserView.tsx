@@ -1,9 +1,9 @@
 import { getAuth, updateProfile, updateEmail, updatePassword } from 'firebase/auth';
 import { useState } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-
-import defaultUserPicture from '../assets/default-user.jpg';
-
+import { Link } from 'react-router';
+import lookitLogoGreen from '/src/assets/lookit-green-logo.png';
+import defaultUser from '/src/assets/default_user_green.png';
+import { useAuthState, useSignOut } from 'react-firebase-hooks/auth';
 const auth = getAuth();
 
 export function UserView() {
@@ -12,7 +12,7 @@ export function UserView() {
   const [newName, setNewName] = useState(user?.displayName);
   const [newEmail, setNewEmail] = useState(user?.email);
   const [newPassword, setNewPassword] = useState("");
-
+  const [signOut, isSigningOut] = useSignOut(auth);
   const updateUser = () => {
     updateProfile(user, {
       displayName: newName
@@ -35,42 +35,86 @@ export function UserView() {
       alert("Error during changing a username")
     });
   }
-
   return (
-    <div className="flex flex-col gap-6 border border-gray-200 px-6 py-8 items-center">
-      <div className="flex flex-col gap-3 items-center">
-        <div className="w-40 h-40">
-          <img className="w-40 h-40 absolute rounded-full" src={defaultUserPicture}/>
-          <input type="file" accept="image/*" className="bg-black opacity-0 w-40 h-40 absolute rounded-full hover:opacity-10 duration-300 ease-in-out flex items-center justify-center cursor-pointer"/>
+    <div 
+      className="min-h-screen flex items-center justify-center" 
+      style={{ backgroundColor: '#F3F3F3'}}
+    >
+      <div className="max-w-md w-full mx-auto px-6">
+
+        <div className="text-center mb-8">
+          <div className="flex items-center justify-center mb-4">
+            <img src={lookitLogoGreen} alt="Lookit Logo" className="w-10 h-10" />
+            <span className="text-2xl font-semibold" style={{ color: '#4A6144' }}>
+            lookit
+            </span>
+          </div>
         </div>
-        <input
-          className="border"
-          value={newName}
-          onChange={(event) => {
-            setNewName(event.target.value);
-          }}
-          placeholder="Name..."
-        />
-        <input
-          className="border"
-          placeholder="Email..."
-          value={newEmail}
-          onChange={(event) => {
-            setNewEmail(event.target.value);
-          }}
-        />
-        <input
-          className="border"
-          placeholder="New password..."
-          value={newPassword}
-          onChange={(event) => {
-            setNewPassword(event.target.value);
-          }}
-        />
+
+        <div className="bg-[#D9D9D9] rounded-lg p-8 shadow-sm">
+          <div className="flex justify-center mb-8">
+            <img src={defaultUser} alt="User" className="w-24 h-24 object-cover rounded-lg" />
+          </div>
+          <div className="space-y-4 mb-8">
+            <div>
+              <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                className="w-full px-4 py-3 rounded-lg border-2 border-gray-400 focus:border-[#4A6144] focus:bg-[#B9CE59] focus:outline-none text-gray-700 bg-white placeholder-[#4A6144]"
+                style={{ color: '#4A6144'}}
+              />
+            </div>
+
+            <div>
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                className="w-full px-4 py-3 rounded-lg border-2 border-gray-400 focus:border-[#4A6144] focus:bg-[#B9CE59] focus:outline-none text-gray-700 bg-white placeholder-[#4A6144]"
+                style={{ color: '#4A6144' }}
+                readOnly
+              />
+            </div>
+
+            <div>
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                className="w-full px-4 py-3 rounded-lg border-2 border-gray-400 focus:border-[#4A6144] focus:bg-[#B9CE59] focus:outline-none text-gray-700 bg-white placeholder-[#4A6144]"
+                style={{ color: '#4A6144' }}
+              />
+            </div>
+          </div>
+
+
+          <button
+            className="w-full py-3 rounded-lg text-white text-lg mb-6 hover:opacity-90 transition-opacity"
+            style={{ backgroundColor: '#4A6144' }}
+          >
+            Change profile info
+          </button>
+
+
+          <div className="flex justify-center items-center gap-4 text-gray-600">
+            <Link 
+              to="/search" 
+              className="hover:text-gray-800 transition-colors underline"
+              style={{ color: '#4A6144' }}
+            >
+              Back to main page
+            </Link>
+            <span>|</span>
+            <button 
+              className="hover:text-gray-800 transition-colors underline"
+              style={{ color: '#4A6144' }}
+            >
+              <button onClick={signOut} disabled={isSigningOut} className="hover:scale-110 duration-300 ease-in-out underline">Sign out</button>
+            </button>
+          </div>
+        </div>
       </div>
-      <button className="hover:scale-110 duration-300 ease-in-out bg-gradient-to-r from-cyan-500 to-blue-500 py-2 px-3" onClick={updateUser}>
-        Update info
-      </button>
     </div>
   );
-}
+};
