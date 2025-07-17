@@ -27,8 +27,6 @@ const SearchPage = () => {
     return <Navigate to="/auth" replace />;
   }
 
-  user.displayName
-
   const processQuery = async (queryData: Object) => {
     // here queryData must be processed and links to needed images must be saved
     const dbQueries = collection(db, "queries");

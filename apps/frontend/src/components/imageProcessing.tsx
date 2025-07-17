@@ -20,7 +20,7 @@ type ImageProcessingProps = {
 };
 
 async function fetchDataFromAPI(url: string, country?: string): Promise<MainResult> {
-  const endpointUrl = 'https://ucu-bootcamp-ai-lookup-backend.onrender.com/scrape/?url=';
+  const endpointUrl = '';
   const response = await axios.get(endpointUrl + url);
   return response.data;
 }
