@@ -2,6 +2,7 @@ import { getAuth, updateProfile, updateEmail, updatePassword } from 'firebase/au
 import { useState } from 'react';
 import { Link } from 'react-router';
 import defaultUser from '/src/assets/default_user_green.png';
+import lookitLogoGreen from '/src/assets/lookit-green-logo.png';
 import { useAuthState, useSignOut } from 'react-firebase-hooks/auth';
 const auth = getAuth();
 
@@ -44,6 +45,7 @@ export function UserView() {
         <div className="text-center mb-8">
           <div className="flex items-center justify-center mb-4">
             <span className="text-2xl font-semibold text-[#4A6144]">
+              <img src={lookitLogoGreen} alt="Lookit Logo" className="w-10 h-10" />
             lookit
             </span>
           </div>
