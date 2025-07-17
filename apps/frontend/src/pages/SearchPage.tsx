@@ -53,9 +53,9 @@ const SearchPage = () => {
       ) : (
         <HistoryQuery historyPage={activePage} newQueryCallback={() => setActivePage(-1)} />
       )}
-      {/* <ImageProcessing userName={user.displayName} />
-       */}
-      <ResultGrid />
+      <ImageProcessing userName={user.displayName} />
+
+      {/* <ResultGrid /> */}
     </div>
   );
 };
