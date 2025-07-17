@@ -24,9 +24,8 @@ export default function ResultCard({ url, price, currency, name_of_website, imag
     // window.location.href =  url;
     window.open(url, '_blank');
   };
-  const [isFullNameShown, setIsFullNameShown] = useState(false);
   return (
-    <div className="w-full aspect-[7/8] bg-white-background flex flex-col overflow-hidden rounded-xs pb-1 text-[12px] lg:text-[16px]">
+    <div className="w-full aspect-[7/8] min-h-[200px] bg-white-background flex flex-col overflow-hidden rounded-xs pb-1 text-[12px] lg:text-[16px]">
       <div className="flex-1 relative cursor-pointer" onClick={goToWebsite}>
         <img
           src={image_url}
@@ -34,15 +33,8 @@ export default function ResultCard({ url, price, currency, name_of_website, imag
         />
       </div>
       <div className="text-dark-green font-poppins flex flex-col px-2 gap-2 pt-1">
-        <div className="flex justify-between">
-          <div>{title?.slice(0, isFullNameShown ? title.length : 20) ?? 'No title'}</div>
-          <button
-            onClick={() => {
-              setIsFullNameShown(!isFullNameShown);
-            }}
-          >
-            ▼
-          </button>
+        <div className="flex justify-between items-center gap-1 cursor-pointer" onClick={goToWebsite}>
+          <div className="flex-1 overflow-hidden whitespace-nowrap text-ellipsis">{title}</div>
         </div>
         <div className="flex justify-center">
           <p>

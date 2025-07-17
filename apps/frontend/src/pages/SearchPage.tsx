@@ -1,7 +1,7 @@
 import { getAuth } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Navigate } from 'react-router';
-import ImageUpload from '../components/ImageUpload.tsx';
+import ImageProcessing from '../components/imageProcessing.tsx';
 import { ProfileButton } from '../components/ProfileButton.tsx';
 import { HistoryButton } from '../components/HistoryButton.tsx';
 import { Sidebar } from '../components/Sidebar.tsx';
@@ -11,7 +11,7 @@ import { useState } from 'react';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase.config.ts';
 import testPicture from '../assets/default-user.jpg';
-
+import ResultGrid from '../components/ResultGrid.tsx';
 const auth = getAuth();
 
 const SearchPage = () => {
@@ -45,6 +45,15 @@ const SearchPage = () => {
 
   return (
     <div className="justify-center">
+      <ProfileButton />
+      <HistoryButton callback={(isOpened) => setSidebarOpened(isOpened)} />
+      <Sidebar isOpened={isSidebarOpened} history={history} activePage={activePage} setActivePage={setActivePage} />
+      {activePage == -1 ? (
+        <ActiveQuery processQuery={processQuery} />
+      ) : (
+        <HistoryQuery historyPage={activePage} newQueryCallback={() => setActivePage(-1)} />
+      )}
+
       <ProfileButton></ProfileButton>
       <HistoryButton callback={(isOpened) => setSidebarOpened(isOpened)}></HistoryButton>
       <Sidebar
@@ -58,7 +67,9 @@ const SearchPage = () => {
       ) : (
         <HistoryQuery historyPage={activePage} newQueryCallback={() => setActivePage(-1)}></HistoryQuery>
       )}
-      <ImageUpload></ImageUpload>
+      <ImageProcessing userName={user.displayName} />
+
+      {/* <ResultGrid /> */}
     </div>
   );
 };

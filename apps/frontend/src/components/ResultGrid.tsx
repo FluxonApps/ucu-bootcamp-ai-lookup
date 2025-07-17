@@ -14,12 +14,24 @@ const testCardProps: CardProps = {
 
 export default function ResultGrid() {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 h-full overflow-hidden w-full bg-amber-500">
-      <ResultCard {...testCardProps} />
-      <ResultCard {...testCardProps} />
-      <ResultCard {...testCardProps} />
-      <ResultCard {...testCardProps} />
-      <ResultCard {...testCardProps} />
+    <div className="flex w-full px-2 justify-center">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3 h-full max-w-250 overflow-hidden">
+        <ResultCard {...testCardProps} />
+        <ResultCard {...testCardProps} />
+        <ResultCard {...testCardProps} />
+        <ResultCard {...testCardProps} />
+        <ResultCard {...testCardProps} />
+        <ResultCard {...testCardProps} />
+        <ResultCard {...testCardProps} />
+        <ResultCard {...testCardProps} />
+        <ResultCard {...testCardProps} />
+        <ResultCard {...testCardProps} />
+        <ResultCard {...testCardProps} />
+        <ResultCard {...testCardProps} />
+        <ResultCard {...testCardProps} />
+        <ResultCard {...testCardProps} />
+        <ResultCard {...testCardProps} />
+      </div>
     </div>
   );
 }
