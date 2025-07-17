@@ -5,6 +5,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 import { db } from '../../firebase.config.ts';
 
+
 const auth = getAuth();
 
 export function Sidebar({ isOpened, activePage, setActivePage }) {
