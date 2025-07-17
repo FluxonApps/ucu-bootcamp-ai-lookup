@@ -1,41 +1,20 @@
-import { getAuth } from 'firebase/auth';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { useState, useEffect } from 'react';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc } from 'firebase/firestore';
+import { useDocument } from 'react-firebase-hooks/firestore';
 import { db } from '../firebase.config.ts';
 
-const auth = getAuth();
+export type HistoryQueryType = {
+	queryId: string;
+};
 
-export function HistoryQuery({ historyPage, newQueryCallback }) {
-  const getHistoryPageData = async () => {
-    const dbUser = doc(db, 'users', user?.uid);
-    const dbUserData = await getDoc(dbUser);
-    return dbUserData.data()?.history[historyPage];
-  };
+export function HistoryQuery({ queryId }: HistoryQueryType) {
+	const queryDoc = doc(db, "queries", queryId);
+	const [queryData] = useDocument(queryDoc);
 
-  const [user, userLoading] = useAuthState(auth);
-  const [historyPageData, setHistoryPageData] = useState();
-
-  useEffect(() => {
-    getHistoryPageData().then((data) => {
-      setHistoryPageData(data);
-    });
-  }, [historyPage]);
-
-  // Do not show page content until auth state is fetched.
-  if (userLoading) {
-    return null;
-  }
-
-  // If user isn't signed in, redirect to auth page.
-  if (!user) {
-    return <Navigate to="/auth" replace />;
-  }
-
-  return (
-    <div>
-      <div>History query data page {historyPageData && historyPageData.date}</div>
-      <button onClick={newQueryCallback}>Send new query</button>
-    </div>
-  );
+	return (
+		<div className={"h-screen grow duration-300 w-[100%]"}>
+			<div>
+				History query data page {queryData && queryData.data()?.timestamp}
+			</div>
+		</div>
+	);
 }
