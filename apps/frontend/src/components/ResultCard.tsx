@@ -26,8 +26,7 @@ export default function ResultCard({ url, price, currency, name_of_website, imag
       </div>
       <div className="text-dark-green font-semibold flex flex-col px-2 gap-2 pt-1">
         <div className="flex justify-between">
-          <div className='text-sm lg:text-md'>{title?.slice(0, 25) ?? 'No title'}</div>
-
+          <div className="text-sm lg:text-md">{title?.slice(0, 25) ?? 'No title'}</div>
         </div>
         <div className="flex justify-center">
           <p>
@@ -36,10 +35,10 @@ export default function ResultCard({ url, price, currency, name_of_website, imag
               {conversion[currency as Currency]}
               {price}
             </span>
-
             <span className="underline font-semibold cursor-pointer text-[12px] xl:text-sm" onClick={goToWebsite}>
               {name_of_website}
             </span>
+          </p>
         </div>
       </div>
     </div>
