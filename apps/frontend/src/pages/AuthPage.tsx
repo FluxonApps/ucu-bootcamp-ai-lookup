@@ -116,7 +116,7 @@ const AuthPage = () => {
               <img src="src/assets/logowhite.png" alt="Search" className="w-12 h-12" />
               <div>
                 <span className="text-2xl font-bold">Welcome to </span>
-                <span className="bg-white px-3 py-1 rounded-lg text-2xl font-bold" style={{ color: '#4A6144' }}>
+                <span className="leading-10 bg-white px-2 py-1 rounded-lg text-2xl font-bold" style={{ color: '#4A6144' }}>
                   Lookit
                 </span>
               </div>
