@@ -1,27 +1,20 @@
 import { getAuth } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Navigate } from 'react-router';
+import { useCollection } from 'react-firebase-hooks/firestore';
 import {
     query,
     collection,
     where,
-    getDocs,
     orderBy,
-    DocumentSnapshot
+    DocumentData
 } from 'firebase/firestore';
-import { useState, useEffect } from 'react';
 import { db } from '../firebase.config.ts';
 import { HistoryButton } from './HistoryButton.tsx';
 import historyLogo from "../assets/history.png";
 import addQuerySign from "../assets/plus.png";
 
 const auth = getAuth();
-
-export type QueryData = {
-    image: string;
-    timestamp: number;
-    userId: string;
-}
 
 export type SidebarType = {
     isOpened: boolean;
@@ -37,13 +30,13 @@ export function Sidebar({
     closeBtnCallback
 }: SidebarType) {
     const [user, userLoading] = useAuthState(auth);
-    const [historyData, setHistoryData] = useState<DocumentSnapshot<QueryData>[]>([]);
 
-    useEffect(() => {
-        if (user) {
-            getHistoryData().then(setHistoryData);
-        }
-    }, [activeQueryId, user]);
+    const queryCollectionRef = collection(db, "queries");
+    const [historyData] = useCollection(query(
+        queryCollectionRef,
+        where("userId", "==", user?.uid),
+        orderBy("timestamp", "desc")
+    ));
 
     if (userLoading) {
         return null;
@@ -52,17 +45,6 @@ export function Sidebar({
     if (!user) {
         return <Navigate to="/auth" replace />;
     }
-
-    const getHistoryData = async (): Promise<DocumentSnapshot<QueryData>[]> => {
-        const dbQueries = collection(db, "queries");
-        const q = query(
-            dbQueries,
-            where("userId", "==", user.uid),
-            orderBy("timestamp", "desc")
-        );
-        const snapshot = await getDocs(q);
-        return snapshot.docs as DocumentSnapshot<QueryData>[];
-    };
 
     return (
         <div
@@ -97,8 +79,8 @@ export function Sidebar({
                     </p>
                 </div>
 
-                {historyData.map((queryDoc) => {
-                    const data: QueryData | undefined = queryDoc.data();
+                {historyData && historyData.docs.map(queryDoc => {
+                    const data: DocumentData | undefined = queryDoc.data();
                     if (!data)
                     {
                         return "";

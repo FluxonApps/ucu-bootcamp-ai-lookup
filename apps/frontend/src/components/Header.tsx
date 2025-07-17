@@ -3,8 +3,8 @@ import { ProfileButton } from '../components/ProfileButton.tsx';
 import { HistoryButton } from '../components/HistoryButton.tsx';
 
 export type HeaderType = {
-  isSidebarOpened: boolean;
-  setSidebarOpened: Function;
+    isSidebarOpened: boolean;
+    setSidebarOpened: Function;
 };
 
 export function Header({ isSidebarOpened, setSidebarOpened }: HeaderType) {
