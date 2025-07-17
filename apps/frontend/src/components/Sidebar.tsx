@@ -8,6 +8,7 @@ import { HistoryButton } from './HistoryButton.tsx';
 import historyLogo from "../assets/history.png"
 import addQuerySign from "../assets/plus.png"
 
+
 const auth = getAuth();
 
 export function Sidebar({ isOpened, activeQueryId, setActiveQueryId, closeBtnCallback }) {

@@ -9,7 +9,6 @@ import { useState } from 'react';
 import { doc, getDoc, updateDoc, query, collection, where, addDoc } from 'firebase/firestore';
 import { db } from '../firebase.config.ts';
 import testPicture from '../assets/default-user.jpg';
-
 const auth = getAuth();
 
 const SearchPage = () => {
@@ -49,7 +48,7 @@ const SearchPage = () => {
       closeBtnCallback={setSidebarOpened}/>
       {activeQuery == null
       ? <ActiveQuery processQuery={processQuery}></ActiveQuery>
-      : <HistoryQuery historyPageId={activeQuery}></HistoryQuery>}
+      : <HistoryQuery queryId={activeQuery}></HistoryQuery>}
     </div>
   );
 };

@@ -1,7 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
 
-function ImageUpload() {
+type ImageUploadProps = {
+  onUpload: (imageUrl: string) => void;
+};
+
+const ImageUpload = ({ onUpload }: ImageUploadProps) => {
+    const inputRef = useRef<HTMLInputElement>(null);
     const [selectedFile, setSelectedFile] = useState()
     const [preview, setPreview] = useState("")
     const storage = getStorage()
@@ -13,7 +18,7 @@ function ImageUpload() {
         }
 
         const objectUrl = URL.createObjectURL(selectedFile)
-        setPreview(objectUrl)
+        onUpload(objectUrl)
 
         return () => URL.revokeObjectURL(objectUrl)
     }, [selectedFile])
@@ -39,9 +44,20 @@ function ImageUpload() {
     }
     return (
         <div>
-            <input type='file' accept='image/*' onChange={onSelectFile}/>
-            {selectedFile && <img src={preview}/>}
-            <button onClick={handleUpload} className='bg-green-100 p-8'>Upload</button>
+            <button
+                className=" px-6 py-2 bg-[#D9D9D9] text-black font-semibold rounded-lg shadow-md hover:bg-[#c0c0c0] transition"
+                onClick={() => inputRef.current?.click()}
+            >
+                Insert picture
+            </button>
+
+            <input
+                type="file"
+                accept="image/*"
+                onChange={onSelectFile}
+                ref={inputRef}
+                className="hidden"
+            />
         </div>
     )
 }
