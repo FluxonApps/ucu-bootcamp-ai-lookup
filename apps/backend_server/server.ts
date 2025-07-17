@@ -13,6 +13,10 @@ app.get('/', (req, res) => {
   res.redirect('/scrape');
 });
 
+app.get('/ping', (req, res) => {
+  res.status(200).send('Health ping');
+});
+
 app.get('/scrape', async (req, res) => {
   const url = req.query.url as string;
 

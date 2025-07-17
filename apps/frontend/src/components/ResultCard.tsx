@@ -24,7 +24,6 @@ export default function ResultCard({ url, price, currency, name_of_website, imag
     // window.location.href =  url;
     window.open(url, '_blank');
   };
-  const [isFullNameShown, setIsFullNameShown] = useState(false);
   return (
     <div className="w-full aspect-[7/9] bg-white flex flex-col overflow-hidden p-3 rounded-lg text-[12px] lg:text-[16px]">
       <div className="flex-1 relative cursor-pointer" onClick={goToWebsite}>
@@ -33,9 +32,9 @@ export default function ResultCard({ url, price, currency, name_of_website, imag
           className={`absolute transform transition-all duration-300 ease-in-out inset-0 w-full h-full object-cover hover:scale-102`}
         />
       </div>
-      <div className="text-dark-green font-semibold font-poppins flex flex-col px-2 gap-2 pt-1">
+      <div className="text-dark-green font-semibold flex flex-col px-2 gap-2 pt-1">
         <div className="flex justify-between">
-          <div className='text-sm lg:text-md'>{title?.slice(0, isFullNameShown ? title.length : 25) ?? 'No title'}</div>
+          <div className='text-sm lg:text-md'>{title?.slice(0, 25) ?? 'No title'}</div>
 
         </div>
         <div className="flex justify-between items-center">
