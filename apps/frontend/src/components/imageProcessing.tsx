@@ -3,16 +3,17 @@ import axios from 'axios';
 import { useState } from 'react';
 import { countryOptions } from '../countries_list.ts';
 import Select from 'react-select';
+import ResultGrid from './ResultGrid.tsx';
 
-type ResultItem = {
+export type ResultItem = {
   url: string;
   price: number | null;
-  currency: string | null;
+  currency: string;
   name_of_website: string;
   image_url?: string;
   title?: string;
 };
-type MainResult = {
+export type MainResult = {
   similarListings: ResultItem[];
 };
 type ImageProcessingProps = {
@@ -20,7 +21,7 @@ type ImageProcessingProps = {
 };
 
 async function fetchDataFromAPI(url: string, country?: string): Promise<MainResult> {
-  const endpointUrl = '';
+  const endpointUrl = 'http://localhost:3131/scrape/?url=';
   const response = await axios.get(endpointUrl + url);
   return response.data;
 }
@@ -102,7 +103,7 @@ export default function ImageProcessing({ userName }: ImageProcessingProps) {
         </div>
       )}
 
-      {data && <p>display data as a grid</p>}
+      {data && <ResultGrid data={data} />}
     </>
   );
 }

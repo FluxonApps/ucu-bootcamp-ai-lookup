@@ -1,6 +1,5 @@
 import { useRef, useState, ChangeEvent } from 'react';
 import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
-
 type ImageUploadProps = {
   onUpload: (imageUrl: string) => void;
 };
@@ -17,7 +16,7 @@ const ImageUpload = ({ onUpload }: ImageUploadProps) => {
     setUploading(true);
     try {
       const fileName = `${Date.now()}_${file.name}`;
-      const storageRef = ref(storage, `uploads/${fileName}`);
+      const storageRef = ref(storage, fileName);
       await uploadBytes(storageRef, file);
       const downloadURL = await getDownloadURL(storageRef);
       onUpload(downloadURL); // ✅ notify parent

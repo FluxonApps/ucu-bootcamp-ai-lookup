@@ -1,13 +1,5 @@
-import { useState } from 'react';
+import { ResultItem } from './imageProcessing';
 
-export type CardProps = {
-  url: string;
-  price: number;
-  currency: Currency;
-  name_of_website: string;
-  image_url: string;
-  title: string;
-};
 type Currency = 'usd' | 'uah' | 'eur' | 'gbp' | 'cny' | 'jpy';
 
 const conversion: Record<Currency, string> = {
@@ -19,7 +11,7 @@ const conversion: Record<Currency, string> = {
   jpy: '¥',
 };
 
-export default function ResultCard({ url, price, currency, name_of_website, image_url, title }: CardProps) {
+export default function ResultCard({ url, price, currency, name_of_website, image_url, title }: ResultItem) {
   const goToWebsite = () => {
     // window.location.href =  url;
     window.open(url, '_blank');
@@ -34,18 +26,19 @@ export default function ResultCard({ url, price, currency, name_of_website, imag
       </div>
       <div className="text-dark-green font-semibold flex flex-col px-2 gap-2 pt-1">
         <div className="flex justify-between">
-          <div className='text-sm lg:text-md'>{title?.slice(0, 25) ?? 'No title'}</div>
-
+          <div className="text-sm lg:text-md">{title?.slice(0, 25) ?? 'No title'}</div>
         </div>
-        <div className="flex justify-between items-center">
-            <span className="font-semibold text-[18px] xl:text-xl text-[#2e2e2e]">
-              {conversion[currency]}
+        <div className="flex justify-center">
+          <p>
+            Price:{' '}
+            <span className="font-semibold">
+              {conversion[currency as Currency]}
               {price}
             </span>
-
             <span className="underline font-semibold cursor-pointer text-[12px] xl:text-sm" onClick={goToWebsite}>
               {name_of_website}
             </span>
+          </p>
         </div>
       </div>
     </div>
