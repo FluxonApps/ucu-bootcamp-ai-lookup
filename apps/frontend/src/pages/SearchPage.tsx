@@ -1,12 +1,10 @@
 import { getAuth } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Navigate } from 'react-router';
-import { ProfileButton } from '../components/ProfileButton.tsx';
-import { HistoryButton } from '../components/HistoryButton.tsx';
 import { Sidebar } from '../components/Sidebar.tsx';
 import { ActiveQuery } from '../components/ActiveQuery.tsx';
 import { HistoryQuery } from '../components/HistoryQuery.tsx';
-import { GreenLogo } from '../components/GreenLogo.tsx';
+import { Header } from '../components/Header.tsx';
 import { useState } from 'react';
 import { doc, getDoc, updateDoc, query, collection, where, addDoc } from 'firebase/firestore';
 import { db } from '../firebase.config.ts';
@@ -43,15 +41,7 @@ const SearchPage = () => {
 
   return (
     <div className={"flex flex-col duration-300 h-screen bg-(--color-white-background) " + (isSidebarOpened && "ml-55 lg:ml-100")}>
-      <div className="flex justify-between items-center p-5">
-        <div className={isSidebarOpened ? "scale-0" : ""}>
-          <HistoryButton toggleCallback={setSidebarOpened} stateOpened={false}></HistoryButton>
-        </div>
-        <div className="hidden sm:block">
-          <GreenLogo></GreenLogo>
-        </div>
-        <ProfileButton></ProfileButton>
-      </div>
+      <Header isSidebarOpened={isSidebarOpened} setSidebarOpened={setSidebarOpened}></Header>
       <Sidebar
       isOpened={isSidebarOpened}
       activeQueryId={activeQuery}
