@@ -268,7 +268,7 @@ const AuthPage = () => {
               </button>
               <hr className='border-[#4A6144]' />
 
-              <div onClick={handleGoogleAuth} className="cursor-pointers bg-[#4A6144] text-white rounded-[8px] h-[50px] py-2 font-medium flex justify-center items-center gap-2 hover:bg-[#546B4E] active:bg-[#4C5C48]">
+              <div onClick={handleGoogleAuth} className="cursor-pointer bg-[#4A6144] text-white rounded-[8px] h-[50px] py-2 font-medium flex justify-center items-center gap-2 hover:bg-[#546B4E] active:bg-[#4C5C48]">
                 <img src='src\assets\google_icon.png' className='object-contain w-8'/>
                 <span>Continue with Google</span>
               </div>
