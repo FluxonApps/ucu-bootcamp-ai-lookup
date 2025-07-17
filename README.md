@@ -72,7 +72,8 @@ You could do this manually, or via an automated GitHub Actions workflow. Just as
 ### LINKS:
 
 Firebase project: https://console.firebase.google.com/u/4/project/ucu-demo-project/overview
-Figma design file: https://www.figma.com/design/jTdkZgNfiAMwGCxpHY9lRp/Untitled?node-id=0-1&p=f&t=LGhCqmQKcdqnSgVw-0
+Figma web design: https://www.figma.com/design/jTdkZgNfiAMwGCxpHY9lRp/Untitled?node-id=0-1&p=f&t=LGhCqmQKcdqnSgVw-0
+Figma presentation design: https://www.figma.com/slides/SbVkIvv37XhZX9PHUR2N6x/lookit_presentation?node-id=1-125&t=99L5kaXNjfrJlDzK-1
 PRD document: https://docs.google.com/document/d/1tOFVZL6-Wku7vtw4rzxisLIYC9OdnxfbCN3cENcjDuA/edit?tab=t.0#heading=h.djd578ti9xl
 
 ## /backend_server usage tutorial:
