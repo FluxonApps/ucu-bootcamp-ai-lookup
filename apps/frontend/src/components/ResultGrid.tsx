@@ -14,7 +14,7 @@ const testCardProps: CardProps = {
 
 export default function ResultGrid() {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 h-full overflow-hidden w-full bg-amber-500">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 h-full overflow-hidden w-[97%] p-10 bg-[#D9D9D9]">
       <ResultCard {...testCardProps} />
       <ResultCard {...testCardProps} />
       <ResultCard {...testCardProps} />

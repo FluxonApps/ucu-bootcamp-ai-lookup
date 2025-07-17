@@ -26,36 +26,27 @@ export default function ResultCard({ url, price, currency, name_of_website, imag
   };
   const [isFullNameShown, setIsFullNameShown] = useState(false);
   return (
-    <div className="w-full aspect-[7/8] bg-white-background flex flex-col overflow-hidden rounded-xs pb-1 text-[12px] lg:text-[16px]">
+    <div className="w-full aspect-[7/9] bg-white flex flex-col overflow-hidden p-3 rounded-lg text-[12px] lg:text-[16px]">
       <div className="flex-1 relative cursor-pointer" onClick={goToWebsite}>
         <img
           src={image_url}
           className={`absolute transform transition-all duration-300 ease-in-out inset-0 w-full h-full object-cover hover:scale-102`}
         />
       </div>
-      <div className="text-dark-green font-poppins flex flex-col px-2 gap-2 pt-1">
+      <div className="text-dark-green font-semibold font-poppins flex flex-col px-2 gap-2 pt-1">
         <div className="flex justify-between">
-          <div>{title?.slice(0, isFullNameShown ? title.length : 20) ?? 'No title'}</div>
-          <button
-            onClick={() => {
-              doShowFullName(!isFullNameShown);
-            }}
-          >
-            ▼
-          </button>
+          <div className='text-sm lg:text-md'>{title?.slice(0, isFullNameShown ? title.length : 25) ?? 'No title'}</div>
+
         </div>
-        <div className="flex justify-center">
-          <p>
-            Price:{' '}
-            <span className="font-semibold">
+        <div className="flex justify-between items-center">
+            <span className="font-semibold text-[18px] xl:text-xl text-[#2e2e2e]">
               {conversion[currency]}
               {price}
             </span>
-            {' | '}
-            <span className="underline font-semibold cursor-pointer" onClick={goToWebsite}>
+
+            <span className="underline font-semibold cursor-pointer text-[12px] xl:text-sm" onClick={goToWebsite}>
               {name_of_website}
             </span>
-          </p>
         </div>
       </div>
     </div>

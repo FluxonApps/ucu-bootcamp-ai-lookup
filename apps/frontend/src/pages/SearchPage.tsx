@@ -11,6 +11,8 @@ import { useState } from 'react';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase.config.ts';
 import testPicture from '../assets/default-user.jpg';
+import ResultCard from '../components/ResultCard.tsx';
+import ResultGrid from '../components/ResultGrid.tsx';
 
 const auth = getAuth();
 
@@ -44,7 +46,7 @@ const SearchPage = () => {
   }
 
   return (
-    <div className="justify-center">
+    <div>
       <ProfileButton></ProfileButton>
       <HistoryButton callback={isOpened => setSidebarOpened(isOpened)}></HistoryButton>
       <Sidebar isOpened={isSidebarOpened} history={history} activePage={activePage} setActivePage={setActivePage}></Sidebar>
@@ -52,6 +54,10 @@ const SearchPage = () => {
       ? <ActiveQuery processQuery={processQuery}></ActiveQuery>
       : <HistoryQuery historyPage={activePage} newQueryCallback={() => setActivePage(-1)}></HistoryQuery>}
       <ImageUpload></ImageUpload>
+      <div className='flex w-full justify-center'>
+        <ResultGrid/>
+      </div>
+
     </div>
   );
 };
