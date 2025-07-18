@@ -1,4 +1,3 @@
-import { Link } from 'react-router';
 import { getAuth } from 'firebase/auth';
 import { useAuthState, useSignOut } from 'react-firebase-hooks/auth';
 import { Navigate } from 'react-router';
@@ -27,8 +26,6 @@ const ProfilePage = () => {
           <UserView></UserView>
         </div>
         <div className="flex justify-around">
-          <button onClick={signOut} disabled={isSigningOut} className="hover:scale-110 duration-300 ease-in-out">Sign out</button>
-          <Link to="/search" className="hover:scale-110 duration-300 ease-in-out">Back to main page</Link>
         </div>
       </div>
     </div>
