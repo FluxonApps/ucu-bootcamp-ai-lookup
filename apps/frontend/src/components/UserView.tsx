@@ -42,7 +42,7 @@ export function UserView() {
     >
       <div className="flex items-center justify-center mb-4">
         <img src={lookitLogoGreen} alt="Lookit Logo" className="w-10 h-10" />
-        <span className="text-2xl font-semibold text-[#4A6144]">
+        <span className="text-[24px] text-[#4A6144]">
         lookit
         </span>
       </div>
