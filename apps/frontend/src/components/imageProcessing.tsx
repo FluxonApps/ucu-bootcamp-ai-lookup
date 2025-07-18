@@ -51,9 +51,6 @@ export default function ImageProcessing({ userName, processQuery }: ImageProcess
 
   return (
     <>
-      {/* TODO change colors to one color style */}
-      {/* Header - centered horizontally, slightly above center */}
-      {/* Centered content block */}
       {!imageUrl && !data && (
         <div className="flex flex-col row-end-2 items-center justify-center min-h-4/5 bg-white-background">
           <h1 className="text-4xl leading-relaxed font-poppins bg-gradient-to-r from-green-gradient to-yellow-gradient bg-clip-text text-transparent">
@@ -79,7 +76,6 @@ export default function ImageProcessing({ userName, processQuery }: ImageProcess
 
           {/* Right: Select + Button */}
           <div className="flex-1 relative flex flex-col items-center justify-center pl-0 md:pl-6">
-          {/* Центрований Select */}
           <div className="w-full">
             <Select
               options={countryOptions}
@@ -91,7 +87,6 @@ export default function ImageProcessing({ userName, processQuery }: ImageProcess
             />
           </div>
 
-          {/* Кнопка в нижньому лівому куті */}
           <button
             onClick={handleSearchClick}
             className="mt-4 md:mt-0 md:absolute md:bottom-4 md:right-4 px-4 py-2 bg-white text-black border border-gray-300 rounded hover:bg-white-background transition">
