@@ -57,7 +57,7 @@ const AuthPage = () => {
     try {
       const res = await signInWithEmailAndPassword(email, password);
       if (!res) throw new Error();
-
+      setAllowRedirect(true);
       alert('Successfully signed in!');
     } catch (e) {
       console.error(e);
