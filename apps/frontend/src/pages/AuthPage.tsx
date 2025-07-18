@@ -5,7 +5,9 @@ import { doc, setDoc } from 'firebase/firestore';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useAuthState, useCreateUserWithEmailAndPassword, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Navigate } from 'react-router';
-
+import logowhite from '../assets/logowhite.png';
+import google_icon from '../assets/google_icon.png'
+import logo from '../assets/logo.png'
 
 import { db, app } from '../firebase.config.ts';
 
@@ -110,7 +112,7 @@ const AuthPage = () => {
             }}
           >
             <div className="flex items-center gap-3 mb-6">
-              <img src="src/assets/logowhite.png" alt="Search" className="w-12 h-12" />
+              <img src={logowhite} alt="Search" className="w-12 h-12" />
               <div>
                 <span className="text-2xl font-bold">Welcome to </span>
                 <span className="bg-white px-3 py-1 rounded-lg text-2xl font-bold" style={{ color: '#4A6144' }}>
@@ -193,7 +195,7 @@ const AuthPage = () => {
               onClick={handleGoogleAuth}
               className="bg-[#4A6144] text-white rounded-[8px] h-[50px] py-2 font-medium hover:bg-[#546B4E] active:bg-[#4C5C48] flex justify-center items-center gap-2"
             >
-              <img src="src/assets/google_icon.png" alt="Google" className="w-5 h-5" />
+              <img src={google_icon} alt="Google" className="w-5 h-5" />
               Continue with Google
             </div>
           </div>
@@ -209,7 +211,7 @@ const AuthPage = () => {
 
           <div className='flex flex-col pl-6 py-6 bg-contain m-4 bg-no-repeat max-[1214px]:bg-white rounded-[25px] min-[1214px]:bg-[url(../src/assets/Rectangle10.png)]'>
             <div className='flex items-center gap-1'>
-              <img src='src/assets/logo.png' className='w-10 h-10' />
+              <img src={logo} className='w-10 h-10' />
               <h2 className='text-[#4A6144] text-4xl font-medium'>Welcome to  <span className='bg-[#4A6144] pt-1 pb-0.5 px-1 pr-16 rounded-lg text-white'>Lookit</span></h2>
             </div>
             <span className='mt-2 text-md text-[#4A6144] font-medium'>Find a better price for a product online - instantly.</span>
@@ -218,7 +220,7 @@ const AuthPage = () => {
           </div>
 
           <div className='flex mb-auto text-white text-3xl font-medium items-center mt-4 ml-4'>
-            <img src='../src/assets/logowhite.png' className='object-contain w-10' />
+            <img src={logowhite} className='object-contain w-10' />
             <span>lookit</span>
           </div>
 
@@ -266,7 +268,7 @@ const AuthPage = () => {
               <hr className='border-[#4A6144]' />
 
               <div onClick={handleGoogleAuth} className="cursor-pointer bg-[#4A6144] text-white rounded-[8px] h-[50px] py-2 font-medium flex justify-center items-center gap-2 hover:bg-[#546B4E] active:bg-[#4C5C48]">
-                <img src='src\assets\google_icon.png' className='object-contain w-8'/>
+                <img src={google_icon} className='object-contain w-8'/>
                 <span>Continue with Google</span>
               </div>
             </div>
