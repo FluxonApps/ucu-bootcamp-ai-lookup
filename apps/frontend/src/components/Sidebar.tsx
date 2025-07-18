@@ -46,6 +46,8 @@ export function Sidebar({
         return <Navigate to="/auth" replace />;
     }
 
+    const showTitleSymbs: number = 25;
+
     return (
         <div
             className={
@@ -53,7 +55,7 @@ export function Sidebar({
                 (isOpened && "w-55 lg:w-100 overflow-y-scroll")
             }
         >
-            <div className="min-w-50 flex flex-col">
+            <div className="min-w-50 flex flex-col h-[100%]">
                 <div className="flex justify-between h-22 items-center pl-2 pr-2">
                     <div className="flex gap-1 items-center">
                         <img src={historyLogo} className="h-10" />
@@ -62,7 +64,8 @@ export function Sidebar({
                     <HistoryButton toggleCallback={closeBtnCallback} stateHistoryOpened={true} />
                 </div>
 
-                <div
+                {historyData?.docs?.length
+                ? <div
                     onClick={() => setActiveQueryId(null)}
                     className={
                         "flex justify-between items-center min-w-10 border-2 border-(--color-grey-buttons) rounded-lg p-2 hover:scale-102 duration-300 cursor-pointer m-2 " +
@@ -78,6 +81,9 @@ export function Sidebar({
                         Make new query
                     </p>
                 </div>
+                : <div className='text-center grow flex items-center'>
+                    <p className='grow'>Create your first query!</p>
+                </div>}
 
                 {historyData && historyData.docs.map(queryDoc => {
                     const data: DocumentData | undefined = queryDoc.data();
@@ -86,8 +92,6 @@ export function Sidebar({
                         return "";
                     }
                     const isActive = queryDoc.id === activeQueryId;
-                    console.log(data);
-                    
 
                     return (
                         <div
@@ -100,7 +104,9 @@ export function Sidebar({
                         >
                             <img src={data.image} className="w-10 h-10" />
                             <p className={"duration-300 text-center " + (isActive && "text-lg lg:text-xl")}>
-                                {/*data.obtainedData.similarListings[0].title*/}
+                                {data.obtainedData.similarListings[0].title.length > showTitleSymbs
+                                ? data.obtainedData.similarListings[0].title.substring(0, showTitleSymbs) + "..."
+                                : data.obtainedData.similarListings[0].title}
                             </p>
                         </div>
                     );

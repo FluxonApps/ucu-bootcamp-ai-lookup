@@ -2,8 +2,12 @@ import ImageUpload from './ImageUpload.tsx';
 import axios from 'axios';
 import { useState } from 'react';
 import { countryOptions } from '../countries_list.ts';
-import Select from 'react-select';
+import Select, { SingleValue } from 'react-select';
 import ResultGrid from './ResultGrid.tsx';
+import { QueryData } from '../pages/SearchPage.tsx';
+import { getAuth } from 'firebase/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { Navigate } from 'react-router';
 
 export type ResultItem = {
   url: string;
@@ -17,21 +21,39 @@ export type MainResult = {
   similarListings: ResultItem[];
 };
 type ImageProcessingProps = {
-  userName: string | null;
-  processQuery: Function;
+  processQuery: (queryData: QueryData) => Promise<void>;
 };
+
+type RegionType = {
+  value: string;
+  label: string;
+}
+
 
 async function fetchDataFromAPI(url: string, country: string): Promise<MainResult> {
   const endpointUrl = import.meta.env.VITE_ENDPOINT_URL;
   const response = await axios.get(`${endpointUrl}?url=${url}&country=${country}`);
   console.log(country)
+
   return response.data;
 }
 
-export default function ImageProcessing({ userName, processQuery }: ImageProcessingProps) {
+const auth = getAuth();
+
+export default function ImageProcessing({ processQuery }: ImageProcessingProps) {
+  const [user, userLoading] = useAuthState(auth);
+
+  if (userLoading) {
+    return null;
+  }
+
+  if (!user) {
+    return <Navigate to="/auth" replace />;
+  }
+
   const [imageUrl, setImageUrl] = useState<string | null>(null);
 
-  const [selectedCountry, setSelectedCountry] = useState({ value: 'ua', label: 'Ukraine' });
+  const [selectedCountry, setSelectedCountry] = useState<SingleValue<RegionType>>({ value: 'ua', label: 'Ukraine' });
   const [country, setCountry] = useState<string | null>(null);
   const [data, setData] = useState<MainResult>();
 
@@ -40,6 +62,10 @@ export default function ImageProcessing({ userName, processQuery }: ImageProcess
   };
 
   const handleSearchClick = async () => {
+    if (!imageUrl || !selectedCountry)
+    {
+      return;
+    }
     setCountry(selectedCountry.value);
     const fetchedData = await fetchDataFromAPI(imageUrl!, selectedCountry.value!);
     setData(fetchedData);
@@ -54,7 +80,7 @@ export default function ImageProcessing({ userName, processQuery }: ImageProcess
       {!imageUrl && !data && (
         <div className="flex flex-col row-end-2 items-center justify-center min-h-4/5 bg-white-background">
           <h1 className="text-4xl leading-relaxed font-poppins bg-gradient-to-r from-green-gradient to-yellow-gradient bg-clip-text text-transparent">
-            Hello, {userName}!
+            Hello, {user.displayName}!
           </h1>
           <ImageUpload onUpload={handleUpload} />
         </div>
@@ -99,14 +125,11 @@ export default function ImageProcessing({ userName, processQuery }: ImageProcess
     )}
 
 
-      {/* Processing screen */}
       {imageUrl && country && !data && (
         <div className="flex flex-col items-center justify-center min-h-4/5 bg-white-background">
           <h2 className="p-1 text-4xl font-bold bg-gradient-to-r from-[#334A40] to-[#C0D55B] bg-clip-text text-transparent">
             Processing...
           </h2>
-
-          {/* TODO send request to API, and set recived data to data variable using setData */}
         </div>
       )}
 

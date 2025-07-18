@@ -69,12 +69,11 @@ const AuthPage = () => {
       if (!res) throw new Error();
 
       // Save user to database.
-      updateProfile(res.user, {
+      await updateProfile(res.user, {
         displayName: username
       });
       const userDocRef = doc(db, 'users', res.user.uid);
       await setDoc(userDocRef, { email });
-
       alert('Successfully signed up!');
     } catch (e) {
       console.error(e);
@@ -95,8 +94,6 @@ const AuthPage = () => {
   const handleGoogleAuth = async () => {
     await signInWithPopup(auth, provider)
   };
-  
-
 
   const isMobile = useIsMobile();
   if (user) {

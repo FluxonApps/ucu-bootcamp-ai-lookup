@@ -1,20 +1,14 @@
 import ImageProcessing from '../components/imageProcessing.tsx'
-import { getAuth } from 'firebase/auth';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { QueryData } from '../pages/SearchPage.tsx'
 
 export type ActiveQueryType = {
-    processQuery: (imageUrl: string) => void;
+    processQuery: (queryData: QueryData) => Promise<void>;
 };
 
-const auth = getAuth();
-
 export function ActiveQuery({ processQuery }: ActiveQueryType) {
-    // obtain data from user and send to callback
-    const [user, userLoading] = useAuthState(auth);
-
     return (
         <div className={"h-screen grow duration-300 w-[100%]"}>
-            <ImageProcessing userName={user.displayName} processQuery={processQuery}/>
+            <ImageProcessing processQuery={processQuery}/>
         </div>
     );
 }
