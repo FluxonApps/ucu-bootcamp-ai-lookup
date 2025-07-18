@@ -57,9 +57,9 @@ export function Sidebar({
         >
             <div className="min-w-50 flex flex-col h-[100%]">
                 <div className="flex justify-between h-22 items-center pl-2 pr-2">
-                    <div className="flex gap-1 items-center">
-                        <img src={historyLogo} className="h-10" />
-                        <h1 className="text-2xl lg:text-3xl -translate-y-0.5">History</h1>
+                    <div className="flex gap-2 items-center">
+                        <img src={historyLogo} className="h-8" />
+                        <h1 className="text-xl lg:text-xl -translate-y-0.5">History</h1>
                     </div>
                     <HistoryButton toggleCallback={closeBtnCallback} stateHistoryOpened={true} />
                 </div>
