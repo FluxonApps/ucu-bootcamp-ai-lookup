@@ -2,8 +2,9 @@ import ImageUpload from './ImageUpload.tsx';
 import axios from 'axios';
 import { useState } from 'react';
 import { countryOptions } from '../countries_list.ts';
-import Select from 'react-select';
+import Select, { SingleValue } from 'react-select';
 import ResultGrid from './ResultGrid.tsx';
+import { QueryData } from '../pages/SearchPage.tsx';
 
 export type ResultItem = {
   url: string;
@@ -18,8 +19,13 @@ export type MainResult = {
 };
 type ImageProcessingProps = {
   userName: string | null;
-  processQuery: Function;
+  processQuery: (queryData: QueryData) => Promise<void>;
 };
+
+type RegionType = {
+  value: string;
+  label: string;
+}
 
 async function fetchDataFromAPI(url: string, country?: string): Promise<MainResult> {
   const endpointUrl = 'http://localhost:3131/scrape/?url=';
@@ -30,7 +36,7 @@ async function fetchDataFromAPI(url: string, country?: string): Promise<MainResu
 export default function ImageProcessing({ userName, processQuery }: ImageProcessingProps) {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
 
-  const [selectedCountry, setSelectedCountry] = useState({ value: 'ua', label: 'Ukraine' });
+  const [selectedCountry, setSelectedCountry] = useState<SingleValue<RegionType>>({ value: 'ua', label: 'Ukraine' });
   const [country, setCountry] = useState<string | null>(null);
   const [data, setData] = useState<MainResult>();
 
@@ -39,6 +45,10 @@ export default function ImageProcessing({ userName, processQuery }: ImageProcess
   };
 
   const handleSearchClick = async () => {
+    if (!imageUrl || !selectedCountry)
+    {
+      return;
+    }
     setCountry(selectedCountry.value);
     const fetchedData = await fetchDataFromAPI(imageUrl!);
     setData(fetchedData);

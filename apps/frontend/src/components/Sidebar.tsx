@@ -46,6 +46,8 @@ export function Sidebar({
         return <Navigate to="/auth" replace />;
     }
 
+    const showTitleSymbs: number = 25;
+
     return (
         <div
             className={
@@ -86,8 +88,6 @@ export function Sidebar({
                         return "";
                     }
                     const isActive = queryDoc.id === activeQueryId;
-                    console.log(data);
-                    
 
                     return (
                         <div
@@ -100,7 +100,9 @@ export function Sidebar({
                         >
                             <img src={data.image} className="w-10 h-10" />
                             <p className={"duration-300 text-center " + (isActive && "text-lg lg:text-xl")}>
-                                {/*data.obtainedData.similarListings[0].title*/}
+                                {data.obtainedData.similarListings[0].title.length > showTitleSymbs
+                                ? data.obtainedData.similarListings[0].title.substring(0, showTitleSymbs) + "..."
+                                : data.obtainedData.similarListings[0].title}
                             </p>
                         </div>
                     );
