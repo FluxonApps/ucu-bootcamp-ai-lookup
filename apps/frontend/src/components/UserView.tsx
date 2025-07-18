@@ -2,7 +2,7 @@ import { getAuth, updateProfile, updateEmail, updatePassword } from 'firebase/au
 import { useState } from 'react';
 import { Link } from 'react-router';
 import defaultUser from '/src/assets/default_user_green.png';
-import lookitLogoGreen from '/src/assets/lookit-green-logo.png';
+import lookitLogoGreen from '/src/assets/logo-green.png';
 import { useAuthState, useSignOut } from 'react-firebase-hooks/auth';
 const auth = getAuth();
 
@@ -38,20 +38,20 @@ export function UserView() {
   }
   return (
     <div 
-      className="min-h-screen flex items-center justify-center bg-[#F3F3F3]"
+      className="flex flex-col items-center justify-center"
     >
+      <div className="flex items-center justify-center mb-4">
+        <img src={lookitLogoGreen} alt="Lookit Logo" className="w-10 h-10" />
+        <span className="text-2xl font-semibold text-[#4A6144]">
+        lookit
+        </span>
+      </div>
       <div className="max-w-md w-full mx-auto px-6">
 
         <div className="text-center mb-8">
-          <div className="flex items-center justify-center mb-4">
-            <span className="text-2xl font-semibold text-[#4A6144]">
-              <img src={lookitLogoGreen} alt="Lookit Logo" className="w-10 h-10" />
-            lookit
-            </span>
-          </div>
         </div>
 
-        <div className="bg-[#D9D9D9] rounded-lg p-8 shadow-sm">
+        <div className="bg-[#D9D9D9] rounded-lg p-8">
           <div className="flex justify-center mb-8">
             <img src={defaultUser} alt="User" className="w-24 h-24 object-cover rounded-lg" />
           </div>
