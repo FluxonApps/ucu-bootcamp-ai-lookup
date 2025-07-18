@@ -17,6 +17,7 @@ export default function ResultCard({ url, price, currency, name_of_website, imag
     window.open(url, '_blank');
   };
   return (
+    
     <div className="w-full aspect-[7/9] bg-white flex flex-col overflow-hidden p-3 rounded-lg text-[12px] lg:text-[16px]">
       <div className="flex-1 relative cursor-pointer" onClick={goToWebsite}>
         <img
@@ -30,10 +31,10 @@ export default function ResultCard({ url, price, currency, name_of_website, imag
 
         </div>
         <div className="flex justify-between items-center">
-            <span className="font-semibold text-[18px] xl:text-xl text-[#2e2e2e]">
-              {/* {conversion[currency]} */}
+            {price ? <span className="font-semibold text-[18px] xl:text-xl text-[#2e2e2e]">
+              {conversion[currency]}
               {price}
-            </span>
+            </span> : <></>}
 
             <span className="underline font-semibold cursor-pointer text-[12px] xl:text-sm" onClick={goToWebsite}>
               {name_of_website}
