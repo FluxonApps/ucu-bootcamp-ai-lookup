@@ -21,9 +21,10 @@ type ImageProcessingProps = {
   processQuery: Function;
 };
 
-async function fetchDataFromAPI(url: string, country?: string): Promise<MainResult> {
+async function fetchDataFromAPI(url: string, country: string): Promise<MainResult> {
   const endpointUrl = import.meta.env.VITE_ENDPOINT_URL;
-  const response = await axios.get(endpointUrl + url);
+  const response = await axios.get(`${endpointUrl}?url=${url}&country=${country}`);
+  console.log(country)
   return response.data;
 }
 
@@ -40,7 +41,7 @@ export default function ImageProcessing({ userName, processQuery }: ImageProcess
 
   const handleSearchClick = async () => {
     setCountry(selectedCountry.value);
-    const fetchedData = await fetchDataFromAPI(imageUrl!);
+    const fetchedData = await fetchDataFromAPI(imageUrl!, selectedCountry.value!);
     setData(fetchedData);
     processQuery({
       originalImg: imageUrl,
