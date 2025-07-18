@@ -12,6 +12,11 @@ import testPicture from '../assets/default-user.jpg';
 import ResultCard from '../components/ResultCard.tsx';
 import ResultGrid from '../components/ResultGrid.tsx';
 
+type QueryData = {
+  originalImg: string,
+  obtainedData: Object
+}
+
 const auth = getAuth();
 
 const SearchPage = () => {
@@ -29,13 +34,14 @@ const SearchPage = () => {
     return <Navigate to="/auth" replace />;
   }
 
-  const processQuery = async (queryData: Object) => {
+  const processQuery = async (queryData: QueryData) => {
     // here queryData must be processed and links to needed images must be saved
     const dbQueries = collection(db, "queries");
     const addedDocProps = await addDoc(dbQueries, {
-      image: testPicture,
+      image: queryData?.originalImg,
       userId: user.uid,
-      timestamp: new Date().getTime()
+      timestamp: new Date().getTime(),
+      obtainedData: queryData?.obtainedData
     });
     
     setActiveQuery(addedDocProps.id);

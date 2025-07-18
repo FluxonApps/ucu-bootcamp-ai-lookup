@@ -13,6 +13,12 @@ export function UserView() {
   const [newEmail, setNewEmail] = useState(user?.email);
   const [newPassword, setNewPassword] = useState("");
 
+  if (!user || !newEmail || !newName)
+  {
+    alert("Error: name or email is empty");
+    return;
+  }
+
   const updateUser = () => {
     updateProfile(user, {
       displayName: newName
