@@ -5,6 +5,9 @@ import { countryOptions } from '../countries_list.ts';
 import Select, { SingleValue } from 'react-select';
 import ResultGrid from './ResultGrid.tsx';
 import { QueryData } from '../pages/SearchPage.tsx';
+import { getAuth } from 'firebase/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { Navigate } from 'react-router';
 
 export type ResultItem = {
   url: string;
@@ -18,7 +21,6 @@ export type MainResult = {
   similarListings: ResultItem[];
 };
 type ImageProcessingProps = {
-  userName: string | null;
   processQuery: (queryData: QueryData) => Promise<void>;
 };
 
@@ -33,7 +35,19 @@ async function fetchDataFromAPI(url: string, country?: string): Promise<MainResu
   return response.data;
 }
 
-export default function ImageProcessing({ userName, processQuery }: ImageProcessingProps) {
+const auth = getAuth();
+
+export default function ImageProcessing({ processQuery }: ImageProcessingProps) {
+  const [user, userLoading] = useAuthState(auth);
+
+  if (userLoading) {
+    return null;
+  }
+
+  if (!user) {
+    return <Navigate to="/auth" replace />;
+  }
+
   const [imageUrl, setImageUrl] = useState<string | null>(null);
 
   const [selectedCountry, setSelectedCountry] = useState<SingleValue<RegionType>>({ value: 'ua', label: 'Ukraine' });
@@ -60,13 +74,10 @@ export default function ImageProcessing({ userName, processQuery }: ImageProcess
 
   return (
     <>
-      {/* TODO change colors to one color style */}
-      {/* Header - centered horizontally, slightly above center */}
-      {/* Centered content block */}
       {!imageUrl && !data && (
         <div className="flex flex-col row-end-2 items-center justify-center min-h-4/5 bg-white-background">
           <h1 className="text-4xl leading-relaxed font-poppins bg-gradient-to-r from-green-gradient to-yellow-gradient bg-clip-text text-transparent">
-            Hello, {userName}!
+            Hello, {user.displayName}!
           </h1>
           <ImageUpload onUpload={handleUpload} />
         </div>
@@ -75,7 +86,7 @@ export default function ImageProcessing({ userName, processQuery }: ImageProcess
       {imageUrl && !country && !data && (
         <div className="flex flex-col items-center justify-center min-h-4/5 bg-white-background">
           <h1 className="text-4xl leading-relaxed font-poppins bg-gradient-to-r from-green-gradient to-yellow-gradient bg-clip-text text-transparent">
-            Hello, {userName}!
+            Hello, {user.displayName}!
           </h1>
           <div className="flex w-full max-w-4xl border border-gray-300 rounded-lg p-4 relative">
             {/* Left: Image */}
@@ -85,7 +96,6 @@ export default function ImageProcessing({ userName, processQuery }: ImageProcess
               className="w-48 h-48 object-cover rounded border border-gray-300 shadow"
             />
 
-            {/* Right: Select + Button */}
             <div className="flex-1 flex flex-col justify-center pl-6 relative">
               <Select
                 options={countryOptions}
@@ -107,14 +117,11 @@ export default function ImageProcessing({ userName, processQuery }: ImageProcess
         </div>
       )}
 
-      {/* Processing screen */}
       {imageUrl && country && !data && (
         <div className="flex flex-col items-center justify-center min-h-4/5 bg-white-background">
           <h2 className="p-1 text-4xl font-bold bg-gradient-to-r from-[#334A40] to-[#C0D55B] bg-clip-text text-transparent">
             Processing...
           </h2>
-
-          {/* TODO send request to API, and set recived data to data variable using setData */}
         </div>
       )}
 
