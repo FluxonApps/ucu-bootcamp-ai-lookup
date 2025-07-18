@@ -23,18 +23,10 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider()
 
 const AuthPage = () => {
-  const [user] = useAuthState(auth);
-  const [signInWithEmailAndPassword, signInLoading] = useSignInWithEmailAndPassword(auth);
-  const [createUserWithEmailAndPassword, signUpLoading] = useCreateUserWithEmailAndPassword(auth);
+  const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
+  const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
   const [viewPassword, setViewPass] = useState(false);
   const [allowRedirect, setAllowRedirect] = useState(false);
-
-  useEffect(() => {
-    if (user?.displayName)
-    {
-      setAllowRedirect(true);
-    }
-  }, [user?.displayName]);
 
   const [showSignIn, setShowSignIn] = useState(false);
   const [username, setUsername] = useState('');
