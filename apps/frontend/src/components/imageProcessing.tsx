@@ -22,7 +22,7 @@ type ImageProcessingProps = {
 };
 
 async function fetchDataFromAPI(url: string, country?: string): Promise<MainResult> {
-  const endpointUrl = 'http://localhost:3131/scrape/?url=';
+  const endpointUrl = import.meta.env.VITE_ENDPOINT_URL;
   const response = await axios.get(endpointUrl + url);
   return response.data;
 }
