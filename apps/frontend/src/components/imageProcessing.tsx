@@ -43,6 +43,12 @@ const auth = getAuth();
 export default function ImageProcessing({ processQuery }: ImageProcessingProps) {
   const [user, userLoading] = useAuthState(auth);
 
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  const [selectedCountry, setSelectedCountry] = useState<SingleValue<RegionType>>({ value: 'ua', label: 'Ukraine' });
+  const [country, setCountry] = useState<string | null>(null);
+  const [data, setData] = useState<MainResult>();
+
   if (userLoading) {
     return null;
   }
@@ -50,12 +56,6 @@ export default function ImageProcessing({ processQuery }: ImageProcessingProps) 
   if (!user) {
     return <Navigate to="/auth" replace />;
   }
-
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-
-  const [selectedCountry, setSelectedCountry] = useState<SingleValue<RegionType>>({ value: 'ua', label: 'Ukraine' });
-  const [country, setCountry] = useState<string | null>(null);
-  const [data, setData] = useState<MainResult>();
 
   const handleUpload = (imageUrl: string) => {
     setImageUrl(imageUrl);
@@ -89,7 +89,7 @@ export default function ImageProcessing({ processQuery }: ImageProcessingProps) 
       {imageUrl && !country && !data && (
       <div className="flex flex-col items-center justify-center min-h-[80vh] bg-white-background p-4">
         <h1 className="text-3xl sm:text-4xl md:text-5xl leading-relaxed font-poppins bg-gradient-to-r from-green-gradient to-yellow-gradient bg-clip-text text-transparent text-center">
-          Hello, {userName}!
+          Hello, {user.displayName}!
         </h1>
 
         <div className="flex flex-col md:flex-row w-full max-w-2xl border bg-white border-gray-300 rounded-lg p-4 mt-6 shadow-md">

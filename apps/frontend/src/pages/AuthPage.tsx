@@ -23,10 +23,10 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider()
 
 const AuthPage = () => {
-  const [user] = useAuthState(auth);
-  const [signInWithEmailAndPassword, signInLoading] = useSignInWithEmailAndPassword(auth);
-  const [createUserWithEmailAndPassword, signUpLoading] = useCreateUserWithEmailAndPassword(auth);
-  const [viewPassword, setViewPass] = useState(false)
+  const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
+  const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
+  const [viewPassword, setViewPass] = useState(false);
+  const [allowRedirect, setAllowRedirect] = useState(false);
 
   const [showSignIn, setShowSignIn] = useState(false);
   const [username, setUsername] = useState('');
@@ -72,8 +72,7 @@ const AuthPage = () => {
       await updateProfile(res.user, {
         displayName: username
       });
-      const userDocRef = doc(db, 'users', res.user.uid);
-      await setDoc(userDocRef, { email });
+      setAllowRedirect(true);
       alert('Successfully signed up!');
     } catch (e) {
       console.error(e);
@@ -96,7 +95,8 @@ const AuthPage = () => {
   };
 
   const isMobile = useIsMobile();
-  if (user) {
+
+  if (allowRedirect) {
     return <Navigate to="/search" replace />;
   }
 

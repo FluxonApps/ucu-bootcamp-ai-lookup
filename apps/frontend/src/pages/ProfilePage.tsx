@@ -7,7 +7,6 @@ const auth = getAuth();
 
 const ProfilePage = () => {
   const [user, userLoading] = useAuthState(auth);
-  const [signOut, isSigningOut] = useSignOut(auth);
 
   // Do not show page content until auth state is fetched.
   if (userLoading) {
