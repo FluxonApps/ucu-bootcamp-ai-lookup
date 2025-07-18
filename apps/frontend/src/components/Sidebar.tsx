@@ -85,7 +85,7 @@ export function Sidebar({
                     <p className='grow'>Create your first query!</p>
                 </div>}
 
-                {historyData && historyData.docs.map(queryDoc => {
+                {historyData && historyData.docs.map((queryDoc, i) => {
                     const data: DocumentData | undefined = queryDoc.data();
                     if (!data)
                     {
@@ -95,7 +95,7 @@ export function Sidebar({
 
                     return (
                         <div
-                            key={queryDoc.id}
+                            key={i}
                             onClick={() => setActiveQueryId(queryDoc.id)}
                             className={
                                 "flex justify-between items-center min-w-10 border-2 border-(--color-grey-buttons) rounded-lg p-2 hover:scale-102 duration-300 cursor-pointer m-2 " +
