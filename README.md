@@ -1,6 +1,7 @@
-# /Name of the project/ `💫🪐☄️`
+# Lookit `💫🪐☄️`
 
-/Description of the project/
+A web application that searches for products related to your image across the web and finds a price and similar listings instantly.
+
 
 Technologies used:
 
@@ -63,9 +64,8 @@ code .
 
 ## Deployment
 
-Hey, some of you might be interested in setting up the deployment of your team's app 👀🚀
+https://ucu-bootcamp-ai-lookup-frontend.onrender.com
 
-You could do this manually, or via an automated GitHub Actions workflow. Just ask your mentor!
 
 ## Useful Materials
 
