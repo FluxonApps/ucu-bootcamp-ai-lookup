@@ -52,16 +52,18 @@ const SearchPage = () => {
   }
 
   return (
-    <div className={"flex flex-col duration-300 h-screen bg-(--color-white-background) " + (isSidebarOpened && "ml-55 lg:ml-100")}>
-      <Header isSidebarOpened={isSidebarOpened} setSidebarOpened={setSidebarOpened}></Header>
+    <div>
       <Sidebar
       isOpened={isSidebarOpened}
       activeQueryId={activeQuery}
       setActiveQueryId={setActiveQuery}
       closeBtnCallback={setSidebarOpened}/>
-      {activeQuery == null
-      ? <ActiveQuery processQuery={processQuery}></ActiveQuery>
-      : <HistoryQuery queryId={activeQuery}></HistoryQuery>}
+      <div className={"flex flex-col duration-300 h-screen bg-(--color-white-background) " + (isSidebarOpened && "hidden lg:ml-100 lg:block")}>
+        <Header isSidebarOpened={isSidebarOpened} setSidebarOpened={setSidebarOpened}></Header>
+        {activeQuery == null
+        ? <ActiveQuery processQuery={processQuery}></ActiveQuery>
+        : <HistoryQuery queryId={activeQuery}></HistoryQuery>}
+      </div>
     </div>
   );
 };

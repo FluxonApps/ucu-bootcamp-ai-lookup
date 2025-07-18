@@ -52,7 +52,7 @@ export function Sidebar({
         <div
             className={
                 "h-screen duration-300 origin-left fixed left-0 top-0 overflow-x-hidden w-0 overflow-y-hidden z-10 " +
-                (isOpened && "w-55 lg:w-100 overflow-y-scroll")
+                (isOpened && "w-screen lg:w-100 overflow-y-scroll")
             }
         >
             <div className="min-w-50 flex flex-col h-[100%]">
