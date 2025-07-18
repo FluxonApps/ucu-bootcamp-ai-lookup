@@ -8,6 +8,8 @@ import { Navigate } from 'react-router';
 import logowhite from '../assets/logowhite.png';
 import google_icon from '../assets/google_icon.png'
 import logo from '../assets/logo.png'
+import eyeShow from '../assets/eye-show.png';
+import eyeHide from '../assets/eye-hide.png';
 
 import { db, app } from '../firebase.config.ts';
 
@@ -179,7 +181,7 @@ const AuthPage = () => {
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
                 tabIndex={-1}
               >
-                <img src={`src/assets/eye-${!viewPassword ? "show" : "hide"}.png`} alt="Toggle password" className="w-6 h-6" />
+                <img src={viewPassword ? eyeHide : eyeShow} alt="Toggle password" className="w-6 h-6" />
               </button>
             </div> 
             <button
@@ -250,7 +252,7 @@ const AuthPage = () => {
                 required
               />
               <div className='w-full relative'>
-                <img className='w-6 right-4 align-middle absolute cursor-pointer top-[14px]' onClick={() => {setViewPass(!viewPassword)}} src={`src/assets/eye-${!viewPassword ? "show" : "hide"}.png`} />
+                <img className='w-6 right-4 align-middle absolute cursor-pointer top-[14px]' onClick={() => {setViewPass(!viewPassword)}} src={viewPassword ? eyeHide : eyeShow} alt="Toggle password"/>
                 <input
                   className="reginput w-full"
                   placeholder="Password"
