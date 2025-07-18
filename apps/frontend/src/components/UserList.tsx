@@ -1,5 +1,5 @@
 import { collection, CollectionReference, deleteDoc, doc, query, updateDoc } from 'firebase/firestore';
-import { db } from '../../firebase.config.ts';
+import { db } from '../firebase.config.ts';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { User } from '../types/user.types.ts';
 import { UserDetails } from '../components/UserDetails.tsx';

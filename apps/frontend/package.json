@@ -12,6 +12,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
     "axios": "^1.10.0",
+    "cors": "^2.8.5",
     "dotenv": "^17.2.0",
     "firebase": "^11.10.0",
     "openai": "^5.9.0",
@@ -19,6 +20,7 @@
     "react-dom": "^19.1.0",
     "react-firebase-hooks": "^5.1.1",
     "react-router": "^7.6.2",
+    "react-select": "^5.10.2",
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {

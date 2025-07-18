@@ -14,6 +14,12 @@ export function UserView() {
   const [newPassword, setNewPassword] = useState("");
   const [signOut, isSigningOut] = useSignOut(auth);
 
+  if (!user || !newEmail || !newName)
+  {
+    alert("Error: name or email is empty");
+    return;
+  }
+
   const updateUser = () => {
     updateProfile(user, {
       displayName: newName
