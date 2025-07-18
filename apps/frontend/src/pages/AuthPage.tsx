@@ -1,7 +1,6 @@
 'use client'
 import { useEffect } from 'react';
 import { getAuth, updateProfile, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useAuthState, useCreateUserWithEmailAndPassword, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Navigate } from 'react-router';
@@ -11,7 +10,7 @@ import logo from '../assets/logo.png'
 import eyeShow from '../assets/eye-show.png';
 import eyeHide from '../assets/eye-hide.png';
 
-import { db, app } from '../firebase.config.ts';
+import { app } from '../firebase.config.ts';
 
 function useIsMobile(breakpoint = 768) {
   const [isMobile, setIsMobile] = useState(false);
@@ -27,6 +26,7 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider()
 
 const AuthPage = () => {
+  const [user] = useAuthState(auth);
   const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
   const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
   const [viewPassword, setViewPass] = useState(false);
@@ -36,6 +36,12 @@ const AuthPage = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    if (user?.displayName) {
+      setAllowRedirect(true);
+    }
+  }, [user?.displayName]);
 
   const switchAuthMode = () => {
     setShowSignIn((prevState) => !prevState);
@@ -183,7 +189,7 @@ const AuthPage = () => {
               >
                 <img src={viewPassword ? eyeHide : eyeShow} alt="Toggle password" className="w-6 h-6" />
               </button>
-            </div> 
+            </div>
             <button
               type="submit"
               className=" bg-[#4A6144] text-white rounded-[8px] h-[50px] py-2 font-medium hover:bg-[#546B4E] active:bg-[#4C5C48] w-full"
@@ -206,7 +212,7 @@ const AuthPage = () => {
       </div>
     </div>
   );
-}                       
+}
   return (
       <div className="flex h-full bg-[#F3F3F3]">
         <div className="w-full backgroundgrad bg-contain bg-no-repeat relative flex flex-col-reverse">
