@@ -40,6 +40,12 @@ const auth = getAuth();
 export default function ImageProcessing({ processQuery }: ImageProcessingProps) {
   const [user, userLoading] = useAuthState(auth);
 
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  const [selectedCountry, setSelectedCountry] = useState<SingleValue<RegionType>>({ value: 'ua', label: 'Ukraine' });
+  const [country, setCountry] = useState<string | null>(null);
+  const [data, setData] = useState<MainResult>();
+
   if (userLoading) {
     return null;
   }
@@ -47,12 +53,6 @@ export default function ImageProcessing({ processQuery }: ImageProcessingProps) 
   if (!user) {
     return <Navigate to="/auth" replace />;
   }
-
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-
-  const [selectedCountry, setSelectedCountry] = useState<SingleValue<RegionType>>({ value: 'ua', label: 'Ukraine' });
-  const [country, setCountry] = useState<string | null>(null);
-  const [data, setData] = useState<MainResult>();
 
   const handleUpload = (imageUrl: string) => {
     setImageUrl(imageUrl);
