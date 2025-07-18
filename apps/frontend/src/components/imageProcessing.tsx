@@ -29,9 +29,12 @@ type RegionType = {
   label: string;
 }
 
-async function fetchDataFromAPI(url: string, country?: string): Promise<MainResult> {
-  const endpointUrl = 'http://localhost:3131/scrape/?url=';
-  const response = await axios.get(endpointUrl + url);
+
+async function fetchDataFromAPI(url: string, country: string): Promise<MainResult> {
+  const endpointUrl = import.meta.env.VITE_ENDPOINT_URL;
+  const response = await axios.get(`${endpointUrl}?url=${url}&country=${country}`);
+  console.log(country)
+
   return response.data;
 }
 
@@ -64,7 +67,7 @@ export default function ImageProcessing({ processQuery }: ImageProcessingProps) 
       return;
     }
     setCountry(selectedCountry.value);
-    const fetchedData = await fetchDataFromAPI(imageUrl!);
+    const fetchedData = await fetchDataFromAPI(imageUrl!, selectedCountry.value!);
     setData(fetchedData);
     processQuery({
       originalImg: imageUrl,
@@ -84,38 +87,43 @@ export default function ImageProcessing({ processQuery }: ImageProcessingProps) 
       )}
 
       {imageUrl && !country && !data && (
-        <div className="flex flex-col items-center justify-center min-h-4/5 bg-white-background">
-          <h1 className="text-4xl leading-relaxed font-poppins bg-gradient-to-r from-green-gradient to-yellow-gradient bg-clip-text text-transparent">
-            Hello, {user.displayName}!
-          </h1>
-          <div className="flex w-full max-w-4xl border border-gray-300 rounded-lg p-4 relative">
-            {/* Left: Image */}
-            <img
-              src={imageUrl}
-              alt="Preview"
-              className="w-48 h-48 object-cover rounded border border-gray-300 shadow"
+      <div className="flex flex-col items-center justify-center min-h-[80vh] bg-white-background p-4">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl leading-relaxed font-poppins bg-gradient-to-r from-green-gradient to-yellow-gradient bg-clip-text text-transparent text-center">
+          Hello, {userName}!
+        </h1>
+
+        <div className="flex flex-col md:flex-row w-full max-w-2xl border bg-white border-gray-300 rounded-lg p-4 mt-6 shadow-md">
+          {/* Left: Image */}
+          <img
+            src={imageUrl}
+            alt="Preview"
+            className="w-full md:w-48 md:h-48 h-64 object-cover rounded border border-gray-300 shadow mb-4 md:mb-0"
+          />
+
+          {/* Right: Select + Button */}
+          <div className="flex-1 relative flex flex-col items-center justify-center pl-0 md:pl-6">
+          <div className="w-full">
+            <Select
+              options={countryOptions}
+              value={selectedCountry}
+              onChange={(option) => setSelectedCountry(option)}
+              placeholder="Select a country..."
+              className="w-full"
+              classNamePrefix="react-select"
             />
-
-            <div className="flex-1 flex flex-col justify-center pl-6 relative">
-              <Select
-                options={countryOptions}
-                value={selectedCountry}
-                onChange={(option) => setSelectedCountry(option)}
-                placeholder="Select a country..."
-                className="w-full"
-                classNamePrefix="react-select"
-              />
-
-              <button
-                onClick={handleSearchClick}
-                className="absolute bottom-0 right-0 mb-2 mr-2 px-4 py-2 bg-green-gradient text-black rounded hover:bg-dark-green transition"
-              >
-                Search
-              </button>
-            </div>
           </div>
+
+          <button
+            onClick={handleSearchClick}
+            className="mt-4 md:mt-0 md:absolute md:bottom-4 md:right-4 px-4 py-2 bg-white text-black border border-gray-300 rounded hover:bg-white-background transition">
+            Search
+          </button>
         </div>
-      )}
+
+        </div>
+      </div>
+    )}
+
 
       {imageUrl && country && !data && (
         <div className="flex flex-col items-center justify-center min-h-4/5 bg-white-background">

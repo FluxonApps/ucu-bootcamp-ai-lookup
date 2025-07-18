@@ -41,6 +41,12 @@ type CurrencyCode = keyof typeof priceCourse;
 type MainResult = {
   similarListings: ResultItem[];
 };
+
+type ScraperMainProps = {
+  imageUrl: string;
+  country: string;
+};
+
 const priceCourse = {
   uah: 1,
   usd: 42,
@@ -142,12 +148,12 @@ export async function aiLookup({
   return results;
 }
 
-export default async function ScraperMain(imageUrl: string): Promise<MainResult> {
+export default async function ScraperMain({imageUrl, country} : ScraperMainProps): Promise<MainResult> {
   const parserApiKey = process.env.SCRAPINGDOG_API_KEY!;
   const scraperResponse = await Scraper({
     api_key: parserApiKey,
     url: imageUrl,
-    country: 'ua',
+    country: country,
     product: true,
   });
 

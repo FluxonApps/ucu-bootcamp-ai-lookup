@@ -93,13 +93,13 @@ async function aiLookup({ urlBatches, }) {
     }
     return results;
 }
-async function ScraperMain(imageUrl) {
+async function ScraperMain({ imageUrl, country }) {
     var _a;
     const parserApiKey = process.env.SCRAPINGDOG_API_KEY;
     const scraperResponse = await Scraper({
         api_key: parserApiKey,
         url: imageUrl,
-        country: 'ua',
+        country: country,
         product: true,
     });
     const lensResults = (_a = scraperResponse === null || scraperResponse === void 0 ? void 0 : scraperResponse.lens_results) === null || _a === void 0 ? void 0 : _a.slice(0, 8);

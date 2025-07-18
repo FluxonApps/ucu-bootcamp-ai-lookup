@@ -26,8 +26,9 @@ app.get('/ping', (req, res) => {
 
 app.get('/scrape', async (req, res) => {
   const url = req.query.url as string;
+  const country = req.query.country as string;
 
-  const result = await ScraperMain(url);
+  const result = await ScraperMain({imageUrl:url, country:country});
 
   res.status(200).send(result);
 });

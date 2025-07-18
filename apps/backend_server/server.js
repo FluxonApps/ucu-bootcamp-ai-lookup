@@ -23,7 +23,8 @@ app.get('/ping', (req, res) => {
 });
 app.get('/scrape', async (req, res) => {
     const url = req.query.url;
-    const result = await (0, scripts_1.default)(url);
+    const country = req.query.country;
+    const result = await (0, scripts_1.default)({ imageUrl: url, country: country });
     res.status(200).send(result);
 });
 app.listen(PORT, () => {
